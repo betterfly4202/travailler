@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+ 
+<!-- resources-local --> 
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+ 
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{HHmmss.SSS} [%-5p] %c{1}.%M():%L %m%n"/>
+        </layout>
+    </appender>
+ 
+    <!-- ===================================== -->
+    <!-- log4jdbc settings                     -->
+    <!-- ===================================== -->
+    <!--                       development production -->
+    <!-- jdbc.connection     :     WARN       WARN    -->
+    <!-- jdbc.audit          :     WARN       WARN    -->
+    <!-- jdbc.sqlonly        :     WARN       WARN    -->
+    <!-- jdbc.sqltiming      :     INFO       WARN    -->
+    <!-- jdbc.resultset      :     WARN       WARN    -->
+    <!-- jdbc.resultsettable :     INFO       WARN    -->
+ 
+    <logger name="jdbc.connection" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="console"/>
+    </logger>
+ 
+    <logger name="jdbc.audit" additivity="false">
+        <level value="WARN"/>
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="java.sql">
+        <level value="DEBUG"/>
+    </logger>
+
+    <logger name="jdbc.sqlonly" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="console"/>
+    </logger>
+ 
+    <logger name="jdbc.sqltiming" additivity="false">
+        <level value="WARN"/>
+        <appender-ref ref="console"/>
+    </logger>
+ 
+    <logger name="jdbc.resultset" additivity="false">
+        <level value="WARN"/>
+        <appender-ref ref="console"/>
+    </logger>
+     
+    <logger name="jdbc.resultsettable" additivity="false">
+        <level value="WARN"/>
+        <appender-ref ref="console"/>
+    </logger>
+
+
+ 
+    <!-- ===================================== -->
+    <!-- Possible Log Levels:                  -->
+    <!-- ===================================== -->
+    <!-- FATAL, ERROR, WARN, INFO, DEBUG, TRACE -->
+ 
+    <root>
+        <level value="DEBUG"/>
+        <appender-ref ref="console"/>
+    </root>
+ 
+</log4j:configuration>
