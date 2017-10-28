@@ -11,17 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController {
 
-    @RequestMapping(value = "")
+    @RequestMapping(value = "/main")
     public ModelAndView mainView(){
         ModelAndView mav = new ModelAndView("");
         return mav;
     }
 
-    @RequestMapping(value = "/main")
-    public ModelAndView test(){
-        ModelAndView mav = new ModelAndView();
 
-
-        return mav;
-    }
 }
