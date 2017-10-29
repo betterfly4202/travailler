@@ -1,0 +1,19 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.travailler.login.dao.LoginMapperDao">
+
+
+    <resultMap id="resultLoginUser" type="com.travailler.login.entity.LoginEntity">
+        <result property="user_id"                     column="USER_ID" />
+        <result property="user_pw"                     column="USER_PW" />
+    </resultMap>
+
+
+    <insert id="insertLoginUser">
+        INSERT INTO TRV_MEMBER (USER_ID, USER_PW)
+             VALUES (#{user_id}, #{user_pw})
+    </insert>
+
+</mapper>

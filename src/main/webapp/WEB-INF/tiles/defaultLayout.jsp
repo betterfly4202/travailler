@@ -71,7 +71,7 @@
     <footer>
         <div class="container">
             <div align="center">
-                <span class="copyright">Copyright &copy; betterFLY</span>
+                <span class="copyright">Copyright &copy; Travailler Team</span>
             </div>
         </div>
     </footer>

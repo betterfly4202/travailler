@@ -9,9 +9,7 @@
 </head>
 <body>
 <script type="text/javascript">
-    <%--document.location.href='<c:url value="index.jsp"/>';--%>
+    document.location.href='<c:url value="/login"/>';
 </script>
-
-    Travailler's Home
 </body>
 </html>

@@ -11,9 +11,4 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController {
 
-    @RequestMapping(value = "")
-    public ModelAndView mainView(){
-        ModelAndView mav = new ModelAndView("");
-        return mav;
-    }
 }
