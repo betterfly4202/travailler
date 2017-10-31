@@ -38,4 +38,26 @@ public class LoginController {
 //        service.addLogUser(loginVo);
         return mav;
     }
+
+    @RequestMapping(value = "/login/auth")
+    public ModelAndView loginAuth(){
+        ModelAndView modelAndView = new ModelAndView("/login/oauth");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/login/receive/auth")
+    public ModelAndView receiveAuth(){
+        ModelAndView modelAndView = new ModelAndView("/login/loginOauth");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/login/refresh/token")
+    public ModelAndView refreshToken(){
+        ModelAndView modelAndView = new ModelAndView("/login/refreshToken");
+
+        return modelAndView;
+    }
+
 }
