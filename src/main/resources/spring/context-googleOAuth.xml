@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
+
+
+    <bean id="googleConnectionFactory" class="org.springframework.social.google.connect.GoogleConnectionFactory">
+        <constructor-arg value="1035245132871-nnfo3ic1reg003eocd28snnnes23k368.apps.googleusercontent.com"/>
+        <constructor-arg value="eistGpA_8BrRZ8PPmg6ptQj8"/>
+    </bean>
+
+    <bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
+        <property name="scope" value="https://googleapis.com/auth/plus.login"/>
+        <property name="redirectUri" value="http://localhost:8080/login/googleSignInCallback"/>
+    </bean>
+
+
+    <bean id="loginController" class="com.travailler.login.controller.LoginController">
+        <property name="googleConnectionFactory" ref="googleConnectionFactory"/>
+        <property name="googleOAuth2Parameters" ref="googleOAuth2Parameters"/>
+    </bean>
+</beans>

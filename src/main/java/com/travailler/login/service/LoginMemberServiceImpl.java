@@ -14,7 +14,7 @@ import java.util.Map;
  */
 
 @Service
-public class LoginMemberServiceImple implements LoginMemberService {
+public class LoginMemberServiceImpl implements LoginMemberService {
 
     @Autowired
     LoginMapperDao loginMapperDao;

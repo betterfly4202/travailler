@@ -9,7 +9,7 @@
 </head>
 <body>
 <script type="text/javascript">
-    document.location.href='<c:url value="/login"/>';
+    document.location.href='<c:url value="/login/googleSignIn"/>';
 </script>
 </body>
 </html>
