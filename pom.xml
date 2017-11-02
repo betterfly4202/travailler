@@ -34,7 +34,7 @@
     </repositories>
 
     <dependencies>
-        <!--Spring 기본-->
+        <!--Spring basic-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -56,7 +56,7 @@
             <version>${spring-version}</version>
         </dependency>
 
-        <!--JSTL 태그 사용-->
+        <!--using JSTL tag -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -141,6 +141,13 @@
             <version>7.8</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/log4sql.jar</systemPath>
+        </dependency>
+
+        <!-- Json mapper object -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.9.1</version>
         </dependency>
 
         <!-- google social api-->
