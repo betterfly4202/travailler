@@ -6,11 +6,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Travailler</title>
 </head>
 <body>
 
-<h1> MAIN PAGE</h1>
+<h1> Travailler Main Page</h1>
+
+${userInfo.displayName}
 
 </body>
 </html>

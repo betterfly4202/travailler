@@ -11,17 +11,21 @@
     <title>Travailler's Home</title>
 </head>
 
-<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+<script src="/resources/js/jquery-1.11.2.min.js"/>
 
 <script>
+    <%--$(document).ready(function(){--%>
+        <%--location.href="<c:url value="/main"/>"--%>
+    <%--});--%>
+    document.location.href="<c:url value="/main"/>";
 </script>
 
 <body>
 
-    구글 로그인 성공
-<br/>
-<h2>이름 : </h2>
-<h2>이메일 : </h2>
+    <%--구글 로그인 성공--%>
+<%--<br/>--%>
+<%--<h2>이름 : ${personInfo.displayName} </h2>--%>
+<%--<h2>이메일 : ${personInfo.emailAddresses}</h2>--%>
 
 </body>
 </html>
