@@ -23,6 +23,7 @@ public class MainController {
         Person person = (Person)session.getAttribute("userInfo");
 
         mav.addObject("userInfo",person);
+        mav.addObject("user_email",person.getAccountEmail());
         return mav;
     }
 

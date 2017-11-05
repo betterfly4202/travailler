@@ -1,5 +1,8 @@
 package com.travailler.login.controller;
 
+import com.travailler.login.bean.LoginVO;
+import com.travailler.login.service.LoginMemberService;
+import com.travailler.login.service.LoginMemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.google.api.Google;
@@ -34,6 +37,9 @@ public class LoginController {
     private GoogleConnectionFactory googleConnectionFactory;
     @Autowired
     private OAuth2Parameters googleOAuth2Parameters;
+
+//    @Autowired
+//    private LoginMemberServiceImpl service;
 
     public void setGoogleConnectionFactory(GoogleConnectionFactory googleConnectionFactory) {
         this.googleConnectionFactory = googleConnectionFactory;
@@ -79,12 +85,13 @@ public class LoginController {
         PlusOperations plusOperations = google.plusOperations();
         Person person = plusOperations.getGoogleProfile();
 
-//        MemberVO member = new MemberVO();
-//        member.setNickName(person.getDisplayName());
-//        member.setAuth("USR");
-//
-//        HttpSession session = request.getSession();
-//        session.setAttribute("_MEMBER_", member );
+
+        LoginVO loginVO = new LoginVO();
+        loginVO.setUserName(person.getDisplayName());
+        loginVO.setUserEmail(person.getAccountEmail());
+
+
+
         mav.setView(new RedirectView("/main"));
         HttpSession session = request.getSession();
         session.setAttribute("userInfo",person);

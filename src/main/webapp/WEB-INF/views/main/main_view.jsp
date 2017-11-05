@@ -12,10 +12,28 @@
     <tiles:putAttribute name="contentBody">
 
 
-    <h1> Travailler Main Page</h1>
-    ${userInfo.displayName}
+        <script>
+
+            <%--console.log(${email});--%>
+
+            function fn_authLogout() {
+                window.open('https://accounts.ggogle.com/logout','popup', 'width=600, height=400');
+            }
+
+            function fn_editUserInfo() {
+                location.href = "<c:url value="/edit/userInfo"/>";
+            }
+
+
+        </script>
+
+        <h1> Travailler Main Page</h1>
+        <button onclick="fn_authLogout()">logout</button>
+        Hello <b>${userInfo.displayName} (${user_email})</b>
+        <br/>
+
+        <button onclick="fn_editUserInfo()">개인 정보 수정</button>
+
 
     </tiles:putAttribute>
 </tiles:insertDefinition>
-<%--<h1> Travailler Main Page</h1>--%>
-<%--${userInfo.displayName}--%>

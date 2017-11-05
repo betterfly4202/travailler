@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>The Travailler's Home</title>
+    <title>Shaiver</title>
 
     <script type="text/javascript">
 
@@ -19,13 +19,14 @@
     <tiles:insertAttribute name="headBody" ignore="true"/>
 </head>
 
-    <tiles:insertAttribute name="contentBody" ignore="true"/>
-<body>
-
 
 <div>
-    TILES BODY
+    TILES HEAD
 </div>
+
+
+<tiles:insertAttribute name="contentBody" ignore="true"/>
+<body>
 
 
 

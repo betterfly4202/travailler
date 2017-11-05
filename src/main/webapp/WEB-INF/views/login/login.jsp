@@ -18,7 +18,7 @@
 </head>
 <body>
 <br/>
-<button onclick="travaillerAuth()">Travailler Auth</button>
+<button onclick="travaillerAuth()">구글 계정 로그인하기</button>
 <div id="name"></div>
 </body>
 </html>

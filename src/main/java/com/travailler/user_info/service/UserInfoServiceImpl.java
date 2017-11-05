@@ -1,7 +1,7 @@
-package com.travailler.login.service;
+package com.travailler.user_info.service;
 
-import com.travailler.login.bean.LoginVO;
-import com.travailler.login.dao.LoginMapperDao;
+import com.travailler.user_info.bean.UserInfoVO;
+import com.travailler.user_info.dao.UserInfoMapperDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +14,16 @@ import java.util.Map;
  */
 
 @Service
-public class LoginMemberServiceImpl implements LoginMemberService {
+public class UserInfoServiceImpl implements UserInfoService {
 
     @Autowired
-    LoginMapperDao loginMapperDao;
+    UserInfoMapperDao loginMapperDao;
 
     @Override
-    public void addLogUser(LoginVO loginVO){
+    public void addLogUser(UserInfoVO loginVO){
         Map<String, Object> param = new HashMap();
-        param.put("user_name",loginVO.getUserName());
-        param.put("user_email",loginVO.getUserEmail());
+        param.put("user_id",loginVO.getUserId());
+        param.put("user_pw",loginVO.getUserPw());
 
         loginMapperDao.insertLoginUser(param);
     }

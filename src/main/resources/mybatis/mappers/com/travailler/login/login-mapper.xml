@@ -12,8 +12,8 @@
 
 
     <insert id="insertLoginUser">
-        INSERT INTO TRV_MEMBER (USER_ID, USER_PW)
-             VALUES (#{user_id}, #{user_pw})
+        INSERT INTO USER_INFO (USER_SEQ, USER_NAME, USER_EMAIL, USER_CREATE_DATE)
+             VALUES (USER_SEQ_SEQ.NEXTVAL, #{user_name}, #{user_email}, SYSDATE)
     </insert>
 
 </mapper>
