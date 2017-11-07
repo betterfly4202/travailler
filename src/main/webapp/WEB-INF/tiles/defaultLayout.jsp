@@ -17,6 +17,7 @@
 
     <script src="<c:url value="/resources/js/jquery-1.11.2.min.js"/>"></script>
     <script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
+    <script src="<c:url value="/resources/js/sockjs.min.js"/>"></script>
 
     <style>
         html,body { height: 100%; margin: 0; padding: 0; }

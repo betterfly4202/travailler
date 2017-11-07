@@ -4,9 +4,7 @@ import com.travailler.login.bean.LoginVO;
 import com.travailler.login.dao.LoginMapperDao;
 import com.travailler.login.entity.LoginEntity;
 import com.travailler.login.service.LoginMemberService;
-import com.travailler.login.service.LoginMemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.impl.GoogleTemplate;
@@ -59,7 +57,7 @@ public class LoginController {
     // login base
     @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView login(HttpSession session){
-        ModelAndView modelAndView = new ModelAndView("/login/login");
+        ModelAndView modelAndView = new ModelAndView("login/login_main");
         //구글 code 발행
         OAuth2Operations oAuth2Operations = googleConnectionFactory.getOAuthOperations();
         String url = oAuth2Operations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);

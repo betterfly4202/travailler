@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 /**
  * Created by betterFLY on 2017. 10. 29.
@@ -22,7 +21,7 @@ public class UserInfoController {
     public ModelAndView viewUserInfo(
             @RequestParam(value="email", required = true) String user_email,
             @ModelAttribute("loginVO") LoginVO loginVO){
-        ModelAndView mav = new ModelAndView("/user_info/edit_userInfo");
+        ModelAndView mav = new ModelAndView("userInfo/userInfo_main");
 
 //        LoginVO userVO = service.getUserInfo(user_email);
         loginVO = service.getUserInfo(user_email);

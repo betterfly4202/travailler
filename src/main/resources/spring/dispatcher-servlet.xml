@@ -21,6 +21,8 @@
     <mvc:annotation-driven/>
 
     <context:annotation-config/>
+    <mvc:resources mapping="/WEB-INF/resources/" location="resources/js/**"/>
+
 
     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="prefix" value="/WEB-INF/views/"/>

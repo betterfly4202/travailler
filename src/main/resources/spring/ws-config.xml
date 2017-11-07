@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:beans="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+       >
+
+    <!-- web socket config -->
+
+    <bean id="echoHandler" class="com.travailler.webchatting.controller.EchoHandler"/>
+
+    <websocket:handlers>
+        <websocket:mapping path="echoHandler" handler="/echoChat"/>
+        <websocket:sockjs/>
+    </websocket:handlers>
+
+</beans>
+
+
+
+
