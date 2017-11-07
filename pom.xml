@@ -23,15 +23,16 @@
 
     <properties>
         <spring-version>4.3.12.RELEASE</spring-version>
+        <spring-security-version>4.2.3.RELEASE</spring-security-version>
     </properties>
 
 
-    <repositories>
-        <repository>
-            <id>mesir-repo</id>
-            <url>http://mesir.googlecode.com/svn/trunk/mavenrepo</url>
-        </repository>
-    </repositories>
+    <!--<repositories>-->
+    <!--<repository>-->
+    <!--<id>mesir-repo</id>-->
+    <!--<url>http://mesir.googlecode.com/svn/trunk/mavenrepo</url>-->
+    <!--</repository>-->
+    <!--</repositories>-->
 
     <dependencies>
         <!--Spring basic-->
@@ -180,8 +181,9 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-websocket</artifactId>
-            <version>4.2.5.RELEASE</version>
+            <version>4.3.12.RELEASE</version>
         </dependency>
+
 
     </dependencies>
 
