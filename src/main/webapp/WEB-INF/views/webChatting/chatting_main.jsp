@@ -5,7 +5,7 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 
 
-<script src="<c:url value="/resources/js/sockjs.min.js"/>"></script>
+<script src="<c:url value="/resources/js/sockjs.js"/>"></script>
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="headBody">
@@ -16,8 +16,6 @@
 
             });
 
-
-            //https://m.blog.naver.com/PostView.nhn?blogId=0oooox&logNo=220325354903&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F
             var sock;
             function sendMessage(){
                 sock = new SockJS("<c:url value="/echoChat"/>");
