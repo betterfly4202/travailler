@@ -1,9 +1,12 @@
 package com.travailler.login.controller;
 
 import com.travailler.login.bean.LoginVO;
+import com.travailler.login.dao.LoginMapperDao;
+import com.travailler.login.entity.LoginEntity;
 import com.travailler.login.service.LoginMemberService;
 import com.travailler.login.service.LoginMemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.impl.GoogleTemplate;
@@ -24,6 +27,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * Created by betterFLY on 2017. 10. 29.
@@ -38,18 +42,21 @@ public class LoginController {
     @Autowired
     private OAuth2Parameters googleOAuth2Parameters;
 
-//    @Autowired
-//    private LoginMemberServiceImpl service;
+    @Autowired
+    private LoginMemberService service;
 
-    public void setGoogleConnectionFactory(GoogleConnectionFactory googleConnectionFactory) {
-        this.googleConnectionFactory = googleConnectionFactory;
-    }
+    @Autowired
+    private LoginMapperDao dao;
 
-    public void setGoogleOAuth2Parameters(OAuth2Parameters googleOAuth2Parameters) {
-        this.googleOAuth2Parameters = googleOAuth2Parameters;
-    }
+//    public void setGoogleConnectionFactory(GoogleConnectionFactory googleConnectionFactory) {
+//        this.googleConnectionFactory = googleConnectionFactory;
+//    }
+//
+//    public void setGoogleOAuth2Parameters(OAuth2Parameters googleOAuth2Parameters) {
+//        this.googleOAuth2Parameters = googleOAuth2Parameters;
+//    }
 
-    //기본 로그인 화면
+    // login base
     @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView login(HttpSession session){
         ModelAndView modelAndView = new ModelAndView("/login/login");
@@ -61,7 +68,7 @@ public class LoginController {
         return modelAndView;
     }
 
-    //인증 콜백 - success
+    // success callback
     @RequestMapping(value = "/login/oauthCallback", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView authCallback(
             @RequestParam String code,
@@ -85,12 +92,17 @@ public class LoginController {
         PlusOperations plusOperations = google.plusOperations();
         Person person = plusOperations.getGoogleProfile();
 
+        // checking user existed
+        HashMap<String, Object> param = new HashMap<String, Object>();
+        param.put("user_email", person.getAccountEmail());
+        LoginEntity userEnt = dao.selectExistedUser(param);
 
-        LoginVO loginVO = new LoginVO();
-        loginVO.setUserName(person.getDisplayName());
-        loginVO.setUserEmail(person.getAccountEmail());
-
-
+        if(userEnt == null){
+            LoginVO loginVO = new LoginVO();
+            loginVO.setUserName(person.getDisplayName());
+            loginVO.setUserEmail(person.getAccountEmail());
+            service.addLogUser(loginVO);
+        }
 
         mav.setView(new RedirectView("/main"));
         HttpSession session = request.getSession();

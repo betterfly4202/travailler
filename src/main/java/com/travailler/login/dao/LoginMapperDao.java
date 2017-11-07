@@ -1,5 +1,7 @@
 package com.travailler.login.dao;
 
+import com.travailler.login.bean.LoginVO;
+import com.travailler.login.entity.LoginEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
@@ -12,4 +14,5 @@ import java.util.Map;
 @Repository
 public interface LoginMapperDao {
     int insertLoginUser(Map<String, Object> map);
+    LoginEntity selectExistedUser(Map<String, Object> map);
 }

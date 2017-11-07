@@ -1,5 +1,6 @@
-package com.travailler.user_info.dao;
+package com.travailler.userInfo.dao;
 
+import com.travailler.login.entity.LoginEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
@@ -11,5 +12,6 @@ import java.util.Map;
 
 @Repository
 public interface UserInfoMapperDao {
-    int insertLoginUser(Map<String, Object> map);
+    LoginEntity selectUserInfo(Map<String, Object> map);
+    void updateUserInfo(Map<String, Object> map);
 }

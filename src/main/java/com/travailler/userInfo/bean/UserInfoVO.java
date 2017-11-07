@@ -1,4 +1,4 @@
-package com.travailler.user_info.bean;
+package com.travailler.userInfo.bean;
 
 /**
  * Created by betterFLY on 2017. 10. 29.

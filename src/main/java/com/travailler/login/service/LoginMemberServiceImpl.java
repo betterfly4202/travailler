@@ -2,10 +2,12 @@ package com.travailler.login.service;
 
 import com.travailler.login.bean.LoginVO;
 import com.travailler.login.dao.LoginMapperDao;
+import com.travailler.login.entity.LoginEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,5 +29,4 @@ public class LoginMemberServiceImpl implements LoginMemberService {
 
         loginMapperDao.insertLoginUser(param);
     }
-
 }

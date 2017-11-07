@@ -1,6 +1,6 @@
-package com.travailler.user_info.entity;
+package com.travailler.userInfo.entity;
 
-import com.travailler.user_info.bean.UserInfoVO;
+import com.travailler.userInfo.bean.UserInfoVO;
 
 /**
  * Created by betterFLY on 2017. 10. 30.

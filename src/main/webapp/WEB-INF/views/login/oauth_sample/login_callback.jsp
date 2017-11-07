@@ -41,7 +41,7 @@
     }
 
     
-    function fn_lognAuth() {
+    function fn_loginAuth() {
         location.href = "<c:url value="/login/auth"/>"
         
     }
@@ -56,7 +56,7 @@
         <br/>
     <button onclick="fn_loginAction()">로그인</button>
     <button>회원가입</button>
-    <button onclick="fn_lognAuth(); return false;">구글 로그인 바로가기</button>
+    <button onclick="fn_loginAuth(); return false;">구글 로그인 바로가기</button>
 </form:form>
 
 </body>

@@ -12,6 +12,36 @@
 
     <title>Shaiver</title>
 
+
+    <script src="<c:url value="/resources/js/jquery-1.11.2.min.js"/>"></script>
+
+
+
+    <style>
+        html,body { height: 100%; margin: 0; padding: 0; }
+
+        #tiles_container {
+            min-height: 100%;
+            position: relative;
+            background: #ffd4c5 url('images/gr.jpg') 0 70px repeat-x;
+        }
+
+        #tiles_header {
+            height: 100px;
+            background-color: #ffc296;
+        }
+        #tiles_body {
+            padding-bottom: 8%;
+        }
+        #tiles_footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 8%;
+            background-color: #cd7e6e;
+        }
+    </style>
+
     <script type="text/javascript">
 
 
@@ -19,27 +49,31 @@
     <tiles:insertAttribute name="headBody" ignore="true"/>
 </head>
 
+<div id="tiles_container">
+    <!-- START HEADER -->
+    <div id="tiles_header">
 
-<div>
-    TILES HEAD
-</div>
 
+            TILES HEAD
+
+
+    </div>
+    <!-- END HEADER -->
 
 <tiles:insertAttribute name="contentBody" ignore="true"/>
 <body>
+    <!-- START BODY -->
+    <div id="tiles_body">
 
 
 
 
 
+    </div>
+    <!-- END BODY -->
 
-
-
-
-
-
-<!-- START FOOTER -->
-    <!-- Footer -->
+    <!-- START FOOTER -->
+    <div id="tiles_footer">
     <footer>
         <div class="container">
             <div align="center">
@@ -47,6 +81,9 @@
             </div>
         </div>
     </footer>
-<!-- END FOOTER -->
+    </div>
+    <!-- END FOOTER -->
+
 </body>
+</div>
 </html>
