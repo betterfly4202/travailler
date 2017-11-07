@@ -12,10 +12,11 @@
 
     <title>Shaiver</title>
 
+    <link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>" media="ALL" />
+    <%--<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/jquery-ui.css" />--%>
 
     <script src="<c:url value="/resources/js/jquery-1.11.2.min.js"/>"></script>
-
-
+    <script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
 
     <style>
         html,body { height: 100%; margin: 0; padding: 0; }
@@ -23,12 +24,12 @@
         #tiles_container {
             min-height: 100%;
             position: relative;
-            background: #ffd4c5 url('images/gr.jpg') 0 70px repeat-x;
+            background: #fff2ef;
         }
 
         #tiles_header {
             height: 100px;
-            background-color: #ffc296;
+            background-color: #ffe6e5;
         }
         #tiles_body {
             padding-bottom: 8%;
@@ -38,7 +39,7 @@
             bottom: 0;
             width: 100%;
             height: 8%;
-            background-color: #cd7e6e;
+            background-color: #cdaf95;
         }
     </style>
 

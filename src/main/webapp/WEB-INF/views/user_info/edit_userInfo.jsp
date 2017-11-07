@@ -7,29 +7,54 @@
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="headBody">
 
+        <script>
+
+            $(function(){
+                $("#datePicker").datepicker({
+                    showOn: "both",
+                    dateFormat: "yy-mm-dd",
+                    buttonImageOnly: true,
+                    changeYear : true,
+                    changeMonth : true,
+                    prevText: '이전 달',
+                    nextText: '다음 달',
+                    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                    dayNames: ['일','월','화','수','목','금','토'],
+                    dayNamesShort: ['일','월','화','수','목','금','토'],
+                    dayNamesMin: ['일','월','화','수','목','금','토'],
+                    showMonthAfterYear: true,
+                    yearSuffix: '년',
+                    yearRange: 'c-100:c'
+                });
+            });
+
+            function fn_modifyUserInfo(){
+                var formData = $("#userInfoForm").serialize();
+
+                <%--$.ajax({--%>
+                    <%--type: "POST",--%>
+                    <%--data :formData,--%>
+                    <%--url: "<c:url value="/edit/userInfo"/>",--%>
+                    <%--success : function(data){--%>
+                        <%--console.log(data);--%>
+                        <%--alert("정보가 수정되었습니다.");--%>
+                    <%--}--%>
+                <%--});--%>
+
+                $.ajax({
+                    type: "POST",
+                    data: formData,
+                    url: "<c:url value="/edit/userInfo"/>"
+                }).done(function (data){
+                    console.log(data);
+                    alert("수정 되었습니다.");
+                });
+                <%--$('#userInfoForm').attr("action",'<c:url value="/edit/userInfo"/>').submit();--%>
+            }
+        </script>
 
     </tiles:putAttribute>
-
-
-
-    <script>
-        function fn_modifyUserInfo(){
-            var formData = $("#userInfoForm").serialize();
-
-            console.log(formData);
-
-            $.ajax({
-                type: "POST",
-//                data :formData,
-                url: "<c:url value="/edit/userInfo"/>",
-                success : function(data){
-                    console.log(data);
-                }
-            });
-            <%--$('#userInfoForm').attr("action",'<c:url value="/edit/userInfo"/>').submit();--%>
-        }
-    </script>
-
 
     <tiles:putAttribute name="contentBody">
 
@@ -40,20 +65,20 @@
             .tg .tg-yw4l{vertical-align:top}
         </style>
 
-        <form:form id="userInfoForm" action="/edit/userInfo" method="POST" modelAttribute="loginVO">
+        <form:form id="userInfoForm" method="POST" modelAttribute="loginVO">
             <form:hidden path="userSeq"/>
             <table class="tg">
             <tr>
-                <th class="tg-yw4l">이름</th>
-                <th class="tg-yw4l">
-                    <form:input path="userName" id="inputTitle" ></form:input>
-                </th>
+                <td class="tg-yw4l">이름</td>
+                <td class="tg-yw4l">
+                    ${loginVO.userName}
+                </td>
             </tr>
             <br/>
             <tr>
                 <td class="tg-yw4l">이메일</td>
                 <td class="tg-yw4l">
-                    <form:input type="text" path="userEmail" id="inputTitle" ></form:input>
+                    ${loginVO.userEmail}
                 </td>
             </tr>
             <br/>
@@ -68,7 +93,7 @@
             <tr>
                 <td class="tg-yw4l">생년월일</td>
                 <td class="tg-yw4l">
-                    <form:input type="text" path="userBirth" ></form:input>
+                    <form:input type="text" id="datePicker" path="userBirth" readonly="true"></form:input>
                 </td>
             </tr>
             <br/>
@@ -96,8 +121,9 @@
             <br/>
 
             </table>
-            <button type="submit">저장</button>
-            <%--<button type="button" onclick="fn_modifyUserInfo()">정보 수정</button>--%>
+            <%--<button type="submit">저장</button>--%>
+            <button type="button" onclick="fn_modifyUserInfo()">정보 수정</button>
+            <button type="button" onclick="history.back()">취소</button>
         </form:form>
     </tiles:putAttribute>
 </tiles:insertDefinition>
