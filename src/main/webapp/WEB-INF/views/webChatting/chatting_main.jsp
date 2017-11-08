@@ -12,23 +12,21 @@
 
         <script>
 
+
+
             var sock;
-            var userId = '${user_email}';
+            var userId = '${userInfo.accountEmail}';
             sock = new SockJS("<c:url value="/webChatting/main"/>");
             sock.onmessage = onMessage;
             sock.onclose = onClose;
             sock.onopen = onOpen;
 
             $(function(){
-
                 $("#sendBtn").click(function(){
                     sendMessage();
 
                 });
-//                $('*').keypress(function (e) {
-//                    if (e.keyCode == 13)
-//                        return false;
-//                });
+
             });
 
             function fn_enter(event) {
@@ -41,6 +39,7 @@
             function sendMessage(){
                 // send message by websocket
                 sock.send($("#message").val());
+                $("#message").val("");
             }
 
             // evt = websocket data
@@ -71,8 +70,8 @@
         <button type="button" onclick="history.back()">이전</button> <br/>
 
         <div>
-            <input type="text" id="message" value="">
-            <input type="button" id="sendBtn" onkeydown="fn_enter(event);" value="전송"> </input>
+            <input type="text" id="message" onkeydown="fn_enter(event);" value="">
+            <input type="button" id="sendBtn" value="전송"> </input>
             <br/>
              <div id="chat_data"></div>
         </div>

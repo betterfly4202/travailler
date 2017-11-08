@@ -27,8 +27,7 @@ public class MainController {
         logger.debug(" 인터셉터 테스트");
         Person person = (Person)session.getAttribute("userInfo");
 
-        mav.addObject("userInfo",person);
-        mav.addObject("user_email",person.getAccountEmail());
+         mav.addObject("userInfo",person);
         return mav;
     }
 

@@ -17,8 +17,9 @@
     </script>
 </head>
 <body>
-<br/>
-<img src="<c:url value="/resources/images/Red-signin_Google_base_44dp.png"/>" onclick="travaillerAuth()"/>
-<div id="name"></div>
+
+
+    <h1>LOGIN  RETRY</h1>
+
 </body>
 </html>

@@ -44,7 +44,17 @@
         }
     </style>
 
+
+    <script src="https://apis.google.com/js/platform.js"></script>
+
     <script type="text/javascript">
+
+        function signOut(){
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOUt().then(function(){
+                alert("sign out user");
+            });
+        }
 
 
     </script>
