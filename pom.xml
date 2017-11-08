@@ -212,6 +212,13 @@
             <version>4.3.12.RELEASE</version>
         </dependency>
 
+        <!-- code encryption  -->
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt-spring3</artifactId>
+            <version>1.9.2</version>
+        </dependency>
+
 
     </dependencies>
 

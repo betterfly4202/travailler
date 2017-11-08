@@ -12,8 +12,6 @@
 
         <script>
 
-
-
             var sock;
             var userId = '${userInfo.accountEmail}';
             sock = new SockJS("<c:url value="/webChatting/main"/>");
@@ -24,9 +22,7 @@
             $(function(){
                 $("#sendBtn").click(function(){
                     sendMessage();
-
                 });
-
             });
 
             function fn_enter(event) {

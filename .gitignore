@@ -25,6 +25,7 @@ out/
 # Intellij #
 .idea/
 *.iml
+rebel.xml
 
 bin/**
 tmp/**

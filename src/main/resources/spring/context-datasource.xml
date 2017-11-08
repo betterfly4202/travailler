@@ -1,5 +1,5 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                         http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 
@@ -8,6 +8,14 @@
         <property name="driverClassName" value="core.log.jdbc.driver.OracleDriver"/>
         <property name="url" value="jdbc:oracle:thin:@110.93.135.145:8834:orcl"/>
         <property name="username" value="betterfly"/>
-        <property name="password" value="gmedia"/>
+        <property name="password" value="ENC(IdZb/eij569yUcbSxSJDqg==)"/>
     </bean>
+
+    <!--
+        http://blog.naver.com/PostView.nhn?blogId=mandolle7&logNo=220946428624&parentCategoryNo=&categoryNo=9&viewDate=&isShowPopularPosts=true&from=search
+        http://blusky10.tistory.com/266
+        https://dingdongdangdong.github.io/dev/2017/01/21/dev-01.html
+        http://blusky10.tistory.com/266
+        https://www.mynotes.kr/db%EC%A0%91%EC%86%8D%EC%A0%95%EB%B3%B4-%EC%95%94%ED%98%B8%ED%99%94-spring-%EB%B0%8F-%ED%94%84%EB%A1%9C%ED%8D%BC%ED%8B%B0-%EC%84%A4%EC%A0%95/
+    -->
 </beans>

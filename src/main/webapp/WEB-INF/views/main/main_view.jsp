@@ -21,23 +21,6 @@
                 location.reload();
                 <%--location.href="<c:url value="/login"/>";--%>
 
-                <%--$.ajax({--%>
-                    <%--url : "https://accounts.google.com/o/oauth2/revoke?token="+url,--%>
-                    <%--success : function(data){--%>
-                        <%--location.href="<c:url value="/login"/>";--%>
-                    <%--}--%>
-                <%--})--%>
-
-                <%--window.open('https://accounts.google.com/logout','popup', 'width=600, height=400');--%>
-
-                <%--$.post("<c:url value="/logout"/>",function(response){--%>
-                    <%--if(response.error){--%>
-                        <%--alert("응답 에러");--%>
-                    <%--}else{--%>
-                        <%--child.close();--%>
-                        <%--location.reload();--%>
-                    <%--}--%>
-                <%--});--%>
             }
 
             function fn_editUserInfo() {
@@ -54,7 +37,7 @@
             }
 
             function fn_makeCafe(){
-                location.href = "<c:url value="/webChatting/main"/>";
+                location.href = "<c:url value="/add/cafelist"/>";
             }
         </script>
 
