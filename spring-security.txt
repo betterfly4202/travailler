@@ -14,7 +14,7 @@
         <websocket:mapping path="/echoChat" handler="echoHandler"/>
         <websocket:sockjs/>
     </websocket:handlers>
-    <bean id="echoHandler" class="com.travailler.webchatting.controller.EchoHandler"/>
+    <bean id="echoHandler" class="com.travailler.common.EchoHandler"/>
 </beans>
 
 

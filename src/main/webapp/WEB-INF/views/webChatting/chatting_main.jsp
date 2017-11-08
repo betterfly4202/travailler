@@ -12,26 +12,70 @@
 
         <script>
 
+            var sock;
+            var userId = '${user_email}';
+            sock = new SockJS("<c:url value="/webChatting/main"/>");
+            sock.onmessage = onMessage;
+            sock.onclose = onClose;
+            sock.onopen = onOpen;
+
             $(function(){
 
+                $("#sendBtn").click(function(){
+                    sendMessage();
+
+                });
+//                $('*').keypress(function (e) {
+//                    if (e.keyCode == 13)
+//                        return false;
+//                });
             });
 
-            var sock;
-            function sendMessage(){
-                sock = new SockJS("<c:url value="/echoChat"/>");
-
-                sock.onmessage = onMessage;
-                sock.onclose = onClose;
-                sock.onopen = function(){
-                    sock.send($("#message").val());
+            function fn_enter(event) {
+                if (event.keyCode == 13) {
+                    sendMessage();
+                    return false;
                 }
             }
+
+            function sendMessage(){
+                // send message by websocket
+                sock.send($("#message").val());
+            }
+
+            // evt = websocket data
+            function onMessage(evt){
+                var data = evt.data;
+                console.log(data);
+                $("#chat_data").append(userId + " : "+data+"<br/>");
+            }
+
+            function onOpen(evt){
+                $("#chat_data").append("enter the room <br/>");
+            }
+
+            function onClose(evt){
+                $("#chat_data").append("연결 끊김");
+            }
+
+            // 채팅 많아질 경우 자동 스크롤링
+            window.setInterval(function() {
+                var elem = $("#chat_data");
+                elem.scrollTop = elem.scrollHeight;
+            }, 0);
+
         </script>
 
     </tiles:putAttribute>
     <tiles:putAttribute name="contentBody">
         <button type="button" onclick="history.back()">이전</button> <br/>
-        CHATTING ROOM
+
+        <div>
+            <input type="text" id="message" value="">
+            <input type="button" id="sendBtn" onkeydown="fn_enter(event);" value="전송"> </input>
+            <br/>
+             <div id="chat_data"></div>
+        </div>
 
     </tiles:putAttribute>
 </tiles:insertDefinition>

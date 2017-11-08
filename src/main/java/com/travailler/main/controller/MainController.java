@@ -1,5 +1,6 @@
 package com.travailler.main.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.social.google.api.plus.Person;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +17,14 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class MainController {
+    Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping(value = "/main")
     public ModelAndView mainView(
             HttpServletRequest request,
             HttpSession session){
         ModelAndView mav = new ModelAndView("/main/main_view");
+        logger.debug(" 인터셉터 테스트");
         Person person = (Person)session.getAttribute("userInfo");
 
         mav.addObject("userInfo",person);

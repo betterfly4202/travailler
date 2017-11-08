@@ -1,12 +1,14 @@
-package com.travailler.webchatting.controller;
+package com.travailler.common;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.social.google.api.plus.Person;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,9 +52,11 @@ public class EchoHandler extends TextWebSocketHandler {
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         for(WebSocketSession webSocketSession : connectedUsers){
+
             // do not receive my messages
             if(!session.getId().equals(webSocketSession)){
-                webSocketSession.sendMessage(new TextMessage("echo : "+message.getPayload()));
+                webSocketSession.sendMessage(new TextMessage(message.getPayload()));
+//                webSocketSession.sendMessage(new TextMessage(person.getDisplayName() + " : " + message.getPayload()));
             }
         }
 

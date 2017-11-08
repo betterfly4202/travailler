@@ -6,8 +6,4 @@
     <comment>Oauth config</comment>
     <entry key="spring.social.google.appId">1035245132871-nnfo3ic1reg003eocd28snnnes23k368.apps.googleusercontent.com</entry>
     <entry key="spring.social.google.appSecret">eistGpA_8BrRZ8PPmg6ptQj8</entry>
-
-    <!--spring.social.google.appId = 1035245132871-nnfo3ic1reg003eocd28snnnes23k368.apps.googleusercontent.com-->
-    <!--spring.social.google.appSecret = eistGpA_8BrRZ8PPmg6ptQj8-->
-
 </properties>

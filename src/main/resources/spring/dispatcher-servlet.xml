@@ -24,6 +24,13 @@
     <context:annotation-config/>
     <mvc:resources mapping="/WEB-INF/resources/" location="resources/js/**"/>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean id="loggerInterceptor" class="com.travailler.common.LoggerInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 
     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="prefix" value="/WEB-INF/views/"/>
