@@ -85,8 +85,8 @@
             <tr>
                 <td class="tg-yw4l">성별</td>
                 <td class="tg-yw4l">
-                    남자 <form:radiobutton path="userGender" value="M" labe="남자"/>
-                    여자 <form:radiobutton path="userGender" value="F" labe="여자"/>
+                    <form:radiobutton path="userGender" value="M" label="남자ㅋ"/>
+                    <form:radiobutton path="userGender" value="F" label="여자ㅋ"/>
                 </td>
             </tr>
             <br/>

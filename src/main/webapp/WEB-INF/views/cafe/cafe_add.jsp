@@ -21,8 +21,6 @@
             $(function(){
 
             });
-
-
         </script>
 
     </tiles:putAttribute>
@@ -33,21 +31,22 @@
         <form:form id="cafeInfoForm" modelAttribute="cafeInfoVO" method="POST">
         <table class="tg">
             <tr>
-                <th class="tg-lqy6">카페 URL</th>
-                <th class="tg-yw4l">
-                    <form:input type="text" path="caUrl"/>
-                </th>
-            </tr>
-            <tr>
                 <td class="tg-yw4l">카페 이름</td>
                 <td class="tg-yw4l">
                     <form:input type="text" path="caName"/>
                 </td>
             </tr>
             <tr>
+                <th class="tg-lqy6">카페 URL</th>
+                <th class="tg-yw4l">
+                    http://shaiver.com/<form:input type="text" path="caUrl"/>
+                </th>
+            </tr>
+            <tr>
                 <td class="tg-yw4l">공개 여부</td>
                 <td class="tg-yw4l">
-                    <form:input type="text" path="caPublicYn"/>
+                    <form:radiobutton path="caPublicYn" value="Y" label="공개"/>
+                    <form:radiobutton path="caPublicYn" value="N" label="비공개"/>
                 </td>
             </tr>
             <tr>
@@ -63,15 +62,15 @@
                 </td>
             </tr>
             <tr>
-                <td class="tg-yw4l">이미지</td>
-                <td class="tg-yw4l">
-                    <form:input type="text" path="caImg"/>
-                </td>
-            </tr>
-            <tr>
                 <td class="tg-yw4l">태그</td>
                 <td class="tg-yw4l">
                     <form:input type="text" path="caTag"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="tg-yw4l">이미지</td>
+                <td class="tg-yw4l">
+                    <form:input type="text" path="caImg"/>
                 </td>
             </tr>
         </table>

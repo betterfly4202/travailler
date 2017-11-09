@@ -26,7 +26,7 @@
     <update id="updateUserInfo">
         UPDATE USER_INFO
            SET USER_GENDER = #{user_gender}
-             , USER_BIRTH = #{user_birth}
+             , USER_BIRTH = TO_DATE(#{user_birth , jdbcType=VARCHAR},'YYYY-MM-DD')
              , USER_JOB = #{user_job}
              , USER_TAG = #{user_tag}
              , USER_AREA = #{user_area}

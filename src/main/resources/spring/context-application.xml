@@ -7,25 +7,15 @@
        http://www.springframework.org/schema/util/spring-util-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
 >
 
-    <util:properties id="authConfig" location="classpath:properties/application-properties.xml"/>
+    <util:properties id="authConfig" location="classpath:/properties/application-properties.xml"/>
 
     <bean id="googleConnectionFactory" class="org.springframework.social.google.connect.GoogleConnectionFactory">
-        <constructor-arg value="1035245132871-nnfo3ic1reg003eocd28snnnes23k368.apps.googleusercontent.com"/>
-        <constructor-arg value="eistGpA_8BrRZ8PPmg6ptQj8"/>
+        <constructor-arg value="${spring.social.google.appId}"/>
+        <constructor-arg value="${spring.social.google.appSecret}"/>
     </bean>
 
     <bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
-        <!--<property name="scope" value="https://www.googleapis.com/auth/plus.login />-->
         <property name="scope" value="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"/>
         <property name="redirectUri" value="http://localhost:6060/login/oauthCallback"/>
     </bean>
-
-    <!--<bean id="loginController" class="com.travailler.login.controller.LoginController">-->
-        <!--<property name="googleConnectionFactory" ref="googleConnectionFactory"/>-->
-        <!--<property name="googleOAuth2Parameters" ref="googleOAuth2Parameters"/>-->
-    <!--</bean>-->
 </beans>
-
-
-
-

@@ -3,7 +3,12 @@
 
     <!-- resources-local -->
     <properties>
-    <comment>Oauth config</comment>
-    <entry key="spring.social.google.appId">1035245132871-nnfo3ic1reg003eocd28snnnes23k368.apps.googleusercontent.com</entry>
-    <entry key="spring.social.google.appSecret">eistGpA_8BrRZ8PPmg6ptQj8</entry>
+        <comment>Oauth config</comment>
+        <entry key="spring.social.google.appId">ENC(D/mbxyWs4ntkYwOyFO28f6jpt5WoZzLn2MncpOK3DF9i6cv7s+Ch3n8WPQM3IRypbPXb6atdMuCrgJ1porq63nHeWUsrrBQhmC8DfEW4UR46KvkGWaIDMg==)</entry>
+        <entry key="spring.social.google.appSecret">ENC(BKbmrCjEj7QhVugyY0EvQwXS9R7OpRddVXagG8z2DkkEqWqziMqWlw==)</entry>
+
+        <entry key="dataSource.driverClassName">core.log.jdbc.driver.OracleDriver</entry>
+        <entry key="dataSource.url">ENC(4I1ttrjESFzK16gaGM7bg834A7aupbKsIKSr2sfkAgjnI3CkXJHVQxJZ9F3rwfvR1G/jUQ1OroY=)</entry>
+        <entry key="dataSource.username">ENC(+CBHAC86DdtPSgxsJ3WV1gSMET0SJEzq)</entry>
+        <entry key="dataSource.password">ENC(Y+8n7E+LgP6IXPq5mXQ0pw==)</entry>
     </properties>
