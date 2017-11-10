@@ -39,6 +39,10 @@
             function fn_makeCafe(){
                 location.href = "<c:url value="/add/cafelist"/>";
             }
+
+            function fn_uploadFile(){
+                location.href = "<c:url value="/main/fileUpload"/>";
+            }
         </script>
 
     </tiles:putAttribute>
@@ -59,6 +63,7 @@
                 <button onclick="fn_editUserInfo()">개인 정보 수정</button>
                 <button onclick="fn_webChatting()">웹 채팅 바로가기</button>
                 <button onclick="fn_makeCafe()">카페 만들기</button>
+                <button onclick="fn_uploadFile()">파일 업로드</button>
             </c:otherwise>
         </c:choose>
 
