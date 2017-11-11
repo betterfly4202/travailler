@@ -88,5 +88,13 @@
         http://webisfree.com/2015-10-01/[html5]-%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C%EC%8B%9C-%EB%8B%A4%EC%A4%91-%EC%84%A0%ED%83%9D-%EB%B0%8F-%EB%93%9C%EB%9E%98%EA%B7%B8-%EC%9D%B4%EB%8F%99-%EB%B0%A9%EB%B2%95
         https://m.blog.naver.com/PostView.nhn?blogId=deepsoft1&logNo=10161312260&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F
 
+
+
+        // spring upload
+        https://m.blog.naver.com/PostView.nhn?blogId=javaking75&logNo=140203390797&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F
+        http://diaryofgreen.tistory.com/146
+        http://testuser.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%9C-%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C-1
+        http://mkil.tistory.com/273
+
     </tiles:putAttribute>
 </tiles:insertDefinition>

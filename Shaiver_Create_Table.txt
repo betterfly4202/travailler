@@ -212,3 +212,14 @@ ALTER TABLE DOWNLOAD_FILE
 /
 
 
+
+/
+CREATE TABLE COMMON_CODE
+(
+    COM_ID                  VARCHAR2(10)           NOT NULL,
+    COM_PARENT_ID           VARCHAR2(10)           NULL,
+    COM_VALUE               VARCHAR2(50)           NULL,
+    COM_COMMENT             VARCHAR2(100)          NULL,
+    CONSTRAINT COM_ID_PK PRIMARY KEY (COM_ID)
+);
+/
