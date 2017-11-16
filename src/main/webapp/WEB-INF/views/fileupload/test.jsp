@@ -157,8 +157,15 @@
     <tiles:putAttribute name="contentBody">
 
 
-        <div id="fileUpload" class="dragAndDropDiv">Drag & Drop Files Here</div>
+        <div id="fileUpload" style="height:300px;">Drag & Drop Files Here</div>
 
+
+        * 현재 구현한 업로더 : http://huskdoll.tistory.com/294
+        * 참고할만한 업로더 : http://doublesprogramming.tistory.com/131
+                            https://m.blog.naver.com/PostView.nhn?blogId=javaking75&logNo=220087655713&proxyReferer=https:%2F%2Fwww.google.co.kr%2F
+
+        --대용량 업로드 apache.commons.fileupload-- <br/>
+        https://m.blog.naver.com/PostView.nhn?blogId=ckeloss&logNo=220292024908&proxyReferer=https:%2F%2Fwww.google.co.kr%2F
 
     </tiles:putAttribute>
 </tiles:insertDefinition>
