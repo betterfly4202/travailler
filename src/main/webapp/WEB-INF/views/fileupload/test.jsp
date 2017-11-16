@@ -8,93 +8,157 @@
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="headBody">
-        <style type="text/css">
-            .tg  {border-collapse:collapse;border-spacing:0;}
-            .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-            .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-            .tg .tg-lqy6{text-align:right;vertical-align:top}
-            .tg .tg-yw4l{vertical-align:top}
-        </style>
-
-
         <script>
-            $(function(){
+//            $(function(){
+//
+//            });
 
+
+
+
+        $(document).ready(function(){
+            var objDragAndDrop = $(".dragAndDropDiv");
+
+            $(document).on("dragenter",".dragAndDropDiv",function(e){
+                e.stopPropagation();
+                e.preventDefault();
+                $(this).css('border', '2px solid #0B85A1');
+            });
+            $(document).on("dragover",".dragAndDropDiv",function(e){
+                e.stopPropagation();
+                e.preventDefault();
+            });
+            $(document).on("drop",".dragAndDropDiv",function(e){
+
+                $(this).css('border', '2px dotted #0B85A1');
+                e.preventDefault();
+                var files = e.originalEvent.dataTransfer.files;
+
+                handleFileUpload(files,objDragAndDrop);
             });
 
+            $(document).on('dragenter', function (e){
+                e.stopPropagation();
+                e.preventDefault();
+            });
+            $(document).on('dragover', function (e){
+                e.stopPropagation();
+                e.preventDefault();
+                objDragAndDrop.css('border', '2px dotted #0B85A1');
+            });
+            $(document).on('drop', function (e){
+                e.stopPropagation();
+                e.preventDefault();
+            });
 
-            var dropFile = function(event){
-                event.preventDefault();
+            function handleFileUpload(files,obj)
+            {
+                for (var i = 0; i < files.length; i++)
+                {
+                    var fd = new FormData();
+                    fd.append('file', files[i]);
+
+                    var status = new createStatusbar(obj); //Using this we can set progress.
+                    status.setFileNameSize(files[i].name,files[i].size);
+                    sendFileToServer(fd,status);
+
+                }
             }
+
+            var rowCount=0;
+            function createStatusbar(obj){
+
+                rowCount++;
+                var row="odd";
+                if(rowCount %2 ==0) row ="even";
+                this.statusbar = $("<div class='statusbar "+row+"'></div>");
+                this.filename = $("<div class='filename'></div>").appendTo(this.statusbar);
+                this.size = $("<div class='filesize'></div>").appendTo(this.statusbar);
+                this.progressBar = $("<div class='progressBar'><div></div></div>").appendTo(this.statusbar);
+                this.abort = $("<div class='abort'>중지</div>").appendTo(this.statusbar);
+
+                obj.after(this.statusbar);
+
+                this.setFileNameSize = function(name,size){
+                    var sizeStr="";
+                    var sizeKB = size/1024;
+                    if(parseInt(sizeKB) > 1024){
+                        var sizeMB = sizeKB/1024;
+                        sizeStr = sizeMB.toFixed(2)+" MB";
+                    }else{
+                        sizeStr = sizeKB.toFixed(2)+" KB";
+                    }
+
+                    this.filename.html(name);
+                    this.size.html(sizeStr);
+                }
+
+                this.setProgress = function(progress){
+                    var progressBarWidth =progress*this.progressBar.width()/ 100;
+                    this.progressBar.find('div').animate({ width: progressBarWidth }, 10).html(progress + "% ");
+                    if(parseInt(progress) >= 100)
+                    {
+                        this.abort.hide();
+                    }
+                }
+
+                this.setAbort = function(jqxhr){
+                    var sb = this.statusbar;
+                    this.abort.click(function()
+                    {
+                        jqxhr.abort();
+                        sb.hide();
+                    });
+                }
+            }
+
+            function sendFileToServer(formData,status)
+            {
+                var uploadURL = "<c:url value="/upload/file"/>"; //Upload URL
+                var extraData ={}; //Extra Data.
+                var jqXHR=$.ajax({
+                    xhr: function() {
+                        var xhrobj = $.ajaxSettings.xhr();
+                        if (xhrobj.upload) {
+                            xhrobj.upload.addEventListener('progress', function(event) {
+                                var percent = 0;
+                                var position = event.loaded || event.position;
+                                var total = event.total;
+                                if (event.lengthComputable) {
+                                    percent = Math.ceil(position / total * 100);
+                                }
+                                //Set progress
+                                status.setProgress(percent);
+                            }, false);
+                        }
+                        return xhrobj;
+                    },
+                    url: uploadURL,
+                    type: "POST",
+                    contentType:false,
+                    processData: false,
+                    cache: false,
+                    data: formData,
+                    success: function(data){
+                        status.setProgress(100);
+
+                        //$("#status1").append("File upload Done<br>");
+                    }
+                });
+
+                status.setAbort(jqXHR);
+            }
+
+        });
+
         </script>
 
     </tiles:putAttribute>
     <tiles:putAttribute name="contentBody">
-        <button type="button" onclick="history.back()">이전</button> <br/>
-
-        <%--<form action="" method="post" enctype="multipart/form-data">--%>
-            <%--<table class="tg">--%>
-                <%--<tr>--%>
-                    <%--<td class="tg-yw4l">태그</td>--%>
-                    <%--<td class="tg-yw4l">--%>
-                    <%--</td>--%>
-                <%--</tr>--%>
-                <%--<tr>--%>
-                    <%--<td class="tg-yw4l">파일 업로드</td>--%>
-                    <%--<td class="tg-yw4l">--%>
-                        <%--<input multiple="multiple" type="file" name="filename[]"/>--%>
-                    <%--</td>--%>
-                <%--</tr>--%>
-            <%--</table>--%>
-        <%--</form>--%>
-
-        <%--<div onchange="dropfile();"></div>--%>
 
 
-        <input type="file" id="files" name="files[]" multiple />
-        <output id="list"></output>
+        <div id="fileUpload" class="dragAndDropDiv">Drag & Drop Files Here</div>
 
-        <script>
-            function handleFileSelect(evt){
-                var files = evt.target.files;
-                var output = [];
-
-                for(var i=0,f; f=files[i]; i++){
-                    output.push('<li><strong>', escape(f.name),'</strong>(',f.type || 'n/a',') -',
-                                f.size,'bytes, last modified : ',
-                                f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString(): 'n/a',
-                                '</li>');
-
-                }
-                document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-            }
-
-            document.getElementById('files').addEventListener('change', handleFileSelect, false);
-
-
-            function handleDragOver(evt){
-                evt.stopPropagation();
-                evt.preventDefault();
-                evt.dataTransfer.dropEffect = 'copy';
-            }
-
-            var dropZone = document.getElementById('drop_zone');
-            dropZone.addEventListener('dragover', handleDragOver, false);
-            dropZone.addEventListener('drop', handleFileSelect, false);
-        </script>
-
-        // 참고 사이트
-        http://dimdim.tistory.com/entry/HTML5-%EC%99%80-JQuery-%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%9C-%EB%8C%80%EC%9A%A9%EB%9F%89-%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C-%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84
-        http://webisfree.com/2015-10-01/[html5]-%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C%EC%8B%9C-%EB%8B%A4%EC%A4%91-%EC%84%A0%ED%83%9D-%EB%B0%8F-%EB%93%9C%EB%9E%98%EA%B7%B8-%EC%9D%B4%EB%8F%99-%EB%B0%A9%EB%B2%95
-        https://m.blog.naver.com/PostView.nhn?blogId=deepsoft1&logNo=10161312260&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F
-
-
-
-        // spring upload
-        https://m.blog.naver.com/PostView.nhn?blogId=javaking75&logNo=140203390797&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F
-        http://diaryofgreen.tistory.com/146
-        http://testuser.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%9C-%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C-1
-        http://mkil.tistory.com/273
 
     </tiles:putAttribute>
 </tiles:insertDefinition>

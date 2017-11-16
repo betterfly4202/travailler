@@ -31,6 +31,12 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
+    <beans:bean id="multipartResolver"
+                class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="maxUploadSize" value="5242880000" /> <!-- max upload size in bytes_20MB -->
+        <beans:property name="maxInMemorySize" value="1048576" /> <!--  max size of file in memory (in bytes)_1MB -->
+    </beans:bean>
+
 
     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="prefix" value="/WEB-INF/views/"/>
