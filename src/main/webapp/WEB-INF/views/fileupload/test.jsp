@@ -8,13 +8,11 @@
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="headBody">
+
         <script>
 //            $(function(){
 //
 //            });
-
-
-
 
         $(document).ready(function(){
             var objDragAndDrop = $(".dragAndDropDiv");
@@ -141,11 +139,11 @@
                     data: formData,
                     success: function(data){
                         status.setProgress(100);
+                        alert("업로드가 완료되었습니다.");
 
                         //$("#status1").append("File upload Done<br>");
                     }
                 });
-
                 status.setAbort(jqXHR);
             }
 
@@ -157,15 +155,19 @@
     <tiles:putAttribute name="contentBody">
 
 
-        <div id="fileUpload" style="height:300px;">Drag & Drop Files Here</div>
+        <div id="fileUpload" class="dragAndDropDiv">Drag & Drop Files Here</div>
 
 
-        * 현재 구현한 업로더 : http://huskdoll.tistory.com/294
-        * 참고할만한 업로더 : http://doublesprogramming.tistory.com/131
-                            https://m.blog.naver.com/PostView.nhn?blogId=javaking75&logNo=220087655713&proxyReferer=https:%2F%2Fwww.google.co.kr%2F
+        <!--
+            ## 현재 구현한 업로더 : http://huskdoll.tistory.com/294
+            ## 참고할만한 업로더 : http://doublesprogramming.tistory.com/131
+                                https://m.blog.naver.com/PostView.nhn?blogId=javaking75&logNo=220087655713&proxyReferer=https:%2F%2Fwww.google.co.kr%2F
 
-        --대용량 업로드 apache.commons.fileupload-- <br/>
-        https://m.blog.naver.com/PostView.nhn?blogId=ckeloss&logNo=220292024908&proxyReferer=https:%2F%2Fwww.google.co.kr%2F
+            ## 대용량 업로드 apache.commons.fileupload-- <br/>
+            https://m.blog.naver.com/PostView.nhn?blogId=ckeloss&logNo=220292024908&proxyReferer=https:%2F%2Fwww.google.co.kr%2F
 
+            ## 파일 업로드시 IIS와 아파치/톰캣의 이슈
+            http://tsdn.tabslab.com/ko/tabsfileup/4.0/html/7f0f0a08-34f1-4651-b053-f74c34ac772e.htm
+        -->
     </tiles:putAttribute>
 </tiles:insertDefinition>
