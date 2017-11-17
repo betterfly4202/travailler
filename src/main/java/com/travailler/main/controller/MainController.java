@@ -24,7 +24,7 @@ public class MainController {
             HttpServletRequest request,
             HttpSession session){
         ModelAndView mav = new ModelAndView("/main/main_view");
-        logger.debug(" 인터셉터 테스트");
+        //logger.debug(" 인터셉터 테스트");
         Person person = (Person)session.getAttribute("userInfo");
 
          mav.addObject("userInfo",person);
