@@ -8,18 +8,8 @@
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="headBody">
-
-        <style>
-
-
-        </style>
-
         <link rel="stylesheet" href="<c:url value="/resources/plupload-2.3.6/js/jquery.plupload.queue/css/jquery.plupload.queue.css"/>" type="text/css" />
         <link rel="stylesheet" href="<c:url value="/resources/plupload-2.3.6/js/jquery.ui.plupload/css/jquery.ui.plupload.css"/>" type="text/css" />
-
-        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/base/jquery-ui.css" type="text/css" />
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 
         <!-- production -->
         <script type="text/javascript" src="<c:url value="/resources/plupload-2.3.6/js/plupload.full.min.js"/>"></script>
@@ -39,20 +29,20 @@
                     // General settings
                     runtimes : 'html5,flash,silverlight,html4',
                     url : "<c:url value="/plupload/file"/>",
-                    //chunk_size : '1mb',
+                    chunk_size : '10mb',
+                    rename : true,
                     unique_names : true,
-                    filters : {
-                        max_file_size : '5000mb',
-                        mime_types: [
-                            {title : "Image files", extensions : "jpg,gif,png"},
-                            {title : "Video files", extensions : "mp4"},
-                            {title : "Zip files", extensions : "zip"}
-                        ]
-                    },
-                    // Resize images on clientside if we can
                     resize : {width : 320, height : 240, quality : 90},
                     flash_swf_url : '<c:url value="/resources/plupload-2.3.6/js/Moxie.swf"/>',
-                    silverlight_xap_url :'<c:url value="/resources/plupload-2.3.6/js/Moxie.xap"/>'
+                    silverlight_xap_url :'<c:url value="/resources/plupload-2.3.6/js/Moxie.xap"/>',
+                    filters : {
+                        max_file_size : '5120mb',
+                        mime_types: [
+                            {title : "Video files", extensions : "mp4"},
+                            {title : "Image files", extensions : "jpg,gif,png"},
+                            {title : "Zip files", extensions : "zip"}
+                        ]
+                    }
                 });
             });
         </script>
