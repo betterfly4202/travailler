@@ -8,6 +8,7 @@
 >
 
     <util:properties id="authConfig" location="classpath:/properties/application-properties.xml"/>
+    <util:properties id="web_properties" location="classpath*:properties/web-properties.xml" />
 
     <bean id="googleConnectionFactory" class="org.springframework.social.google.connect.GoogleConnectionFactory">
         <constructor-arg value="${spring.social.google.appId}"/>

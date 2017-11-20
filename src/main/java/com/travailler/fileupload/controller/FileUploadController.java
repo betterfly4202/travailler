@@ -1,6 +1,9 @@
 package com.travailler.fileupload.controller;
 
+import com.travailler.common.PropertiesValue;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +25,9 @@ import java.util.Iterator;
 @Controller
 public class FileUploadController {
     Logger logger = Logger.getLogger(this.getClass());
+
+    @Autowired
+    private PropertiesValue propertiesValue;
 
     @RequestMapping(value = "/main/fileUpload")
     public ModelAndView fileUploadMain(){
@@ -63,7 +69,6 @@ public class FileUploadController {
     }
 
 
-
     @RequestMapping(value = "/main/plupload")
     public ModelAndView pluploadMain(){
         ModelAndView mav = new ModelAndView("/fileupload/plupload");
@@ -71,15 +76,19 @@ public class FileUploadController {
         return mav;
     }
 
-
     // https://github.com/biezhi/springmvc-plupload/blob/master/src/main/java/com/plupload/controller/PluploadController.java
     private static final int BUFFER_SIZE = 100 * 1024;
-    @RequestMapping(value = "/plupload/file", method= RequestMethod.POST) //ajax에서 호출하는 부분
+    @RequestMapping(value = "/plupload/file", method= RequestMethod.POST)
     @ResponseBody
-    public String plupload(@RequestParam MultipartFile file, HttpServletRequest request, HttpSession session) {
+    public String plupload(@RequestParam MultipartFile file, HttpServletRequest request, HttpSession session
+//                           ,@RequestParam(required = false, value = "chunks") Integer chunks,
+//                           @RequestParam(required = false, value = "chunk") Integer chunk
+        ){
         try {
-            String fileName = file.getOriginalFilename();
-            String realPath = "E:/upload_test";
+//            String fileName = file.getOriginalFilename();
+            String fileName = request.getParameter("name");
+
+            String realPath = propertiesValue.file_addonfile_save_path;
 
             Integer chunk = 0, chunks = 0;
             if(null != request.getParameter("chunk") && !request.getParameter("chunk").equals("")){

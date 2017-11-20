@@ -30,6 +30,7 @@
                     runtimes : 'html5,flash,silverlight,html4',
                     url : "<c:url value="/plupload/file"/>",
                     chunk_size : '10mb',
+                    send_chunk_number: false,
                     rename : true,
                     unique_names : true,
                     resize : {width : 320, height : 240, quality : 90},
@@ -50,7 +51,9 @@
     </tiles:putAttribute>
     <tiles:putAttribute name="contentBody">
         <h3>HTML 5 runtime</h3>
-        <div id="html5_uploader">Your browser doesn't support native upload.</div>
+        <div id="html5_uploader">
+            Your browser doesn't support native upload.
+        </div>
 
        </tiles:putAttribute>
 </tiles:insertDefinition>

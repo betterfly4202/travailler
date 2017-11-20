@@ -3,5 +3,9 @@
 
 <!-- resources-local -->
 <properties>
+    <comment>shaiver-properties</comment>
+
+    <entry key="file.addonfile.save.path"><![CDATA[E:/upload_test]]></entry>
+
 
 </properties>
