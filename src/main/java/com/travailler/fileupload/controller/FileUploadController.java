@@ -1,12 +1,10 @@
 package com.travailler.fileupload.controller;
 
+import com.travailler.common.FileUpload;
 import com.travailler.common.PropertiesValue;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
-import org.jasypt.commons.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,9 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 /**
  * Created by betterFLY on 2017-11-10.
@@ -81,82 +77,19 @@ public class FileUploadController {
     }
 
     // https://github.com/biezhi/springmvc-plupload/blob/master/src/main/java/com/plupload/controller/PluploadController.java
-    private static final int BUFFER_SIZE = 100 * 1024;
     @RequestMapping(value = "/plupload/file", method= RequestMethod.POST)
     @ResponseBody
-    public String plupload(@RequestParam MultipartFile file, HttpServletRequest request, HttpSession session){
-        try {
-//            String fileName = file.getOriginalFilename();
-            String fileName = request.getParameter("name");
-
-            String realPath = propertiesValue.file_addonfile_save_path;
-
-            Integer chunk = 0, chunks = 0;
-            if(null != request.getParameter("chunk") && !request.getParameter("chunk").equals("")){
-                chunk = Integer.valueOf(request.getParameter("chunk"));
-            }
-            if(null != request.getParameter("chunks") && !request.getParameter("chunks").equals("")){
-                chunks = Integer.valueOf(request.getParameter("chunks"));
-            }
-            logger.info("chunk:[" + chunk + "] chunks:[" + chunks + "]");
-
-            File folder = new File(realPath);
-            if (!folder.exists()) {
-                folder.mkdirs();
-            }
-            File destFile = new File(folder, fileName);
-            if (chunk == 0 && destFile.exists()) {
-                destFile.delete();
-                destFile = new File(folder, fileName);
-            }
-            appendFile(file.getInputStream(), destFile);
-            if (chunk == chunks - 1) {
-                logger.info("upload success !");
-            }else {
-                logger.info("left ["+(chunks-1-chunk)+"] chunks...");
-            }
-
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-        }
+    public String plupload(@RequestParam MultipartFile file,
+                           HttpServletRequest request, HttpSession session){
+        String filePath = propertiesValue.file_addonfile_save_path;
+        FileUpload fl = new FileUpload();
+        fl.plFileUpload(file,filePath,request);
         return "UPLOAD_SUCCESS";
-    }
-
-    private void appendFile(InputStream in, File destFile) {
-        OutputStream out = null;
-        try {
-            if (destFile.exists()) {
-                out = new BufferedOutputStream(new FileOutputStream(destFile, true), BUFFER_SIZE);
-            } else {
-                out = new BufferedOutputStream(new FileOutputStream(destFile),BUFFER_SIZE);
-            }
-            in = new BufferedInputStream(in, BUFFER_SIZE);
-
-            int len = 0;
-            byte[] buffer = new byte[BUFFER_SIZE];
-            while ((len = in.read(buffer)) > 0) {
-                out.write(buffer, 0, len);
-            }
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        } finally {
-            try {
-                if (null != in) {
-                    in.close();
-                }
-                if(null != out){
-                    out.close();
-                }
-            } catch (IOException e) {
-                logger.error(e.getMessage());
-            }
-        }
     }
 
     @RequestMapping(value = "/file/download")
     public ModelAndView fileDown(@RequestParam String filePath, HttpServletRequest request) throws Exception{
         File file= new File(filePath);
-
         // viewName : bean Setting, modelName : download Logic
         return new ModelAndView("fileDownload","downloadFile",file);
     }

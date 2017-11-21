@@ -32,20 +32,6 @@ import java.util.Map;
 public class FileDownload extends AbstractView {
     @Override
     protected void renderMergedOutputModel(Map<String, Object> map, HttpServletRequest request, HttpServletResponse response) throws Exception{
-//        String originalFileName = (String)map.get("originalFileName");
-//        String userAgent = request.getHeader("User-Agent");
-//        String contentType = request.getContentType();
-//        int contentLength = (int)file.length();
-//        response.setContentType(contentType);
-//        response.setContentLength(contentLength);
-//
-//        boolean ie = userAgent.indexOf("MSIE") > -1;
-//        String fileName = null;
-//
-//        if(ie == true)
-//            fileName = URLEncoder.encode(originalFileName, "UTF-8");
-//        else
-//            fileName = new String(originalFileName.getBytes("UTF-8"),"ISO-8859-1");
         File file = (File)map.get("downloadFile");
         String fileName = file.getName();
 
