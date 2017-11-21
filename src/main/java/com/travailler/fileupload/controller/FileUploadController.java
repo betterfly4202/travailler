@@ -3,8 +3,10 @@ package com.travailler.fileupload.controller;
 import com.travailler.common.PropertiesValue;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.jasypt.commons.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by betterFLY on 2017-11-10.
@@ -80,10 +84,7 @@ public class FileUploadController {
     private static final int BUFFER_SIZE = 100 * 1024;
     @RequestMapping(value = "/plupload/file", method= RequestMethod.POST)
     @ResponseBody
-    public String plupload(@RequestParam MultipartFile file, HttpServletRequest request, HttpSession session
-//                           ,@RequestParam(required = false, value = "chunks") Integer chunks,
-//                           @RequestParam(required = false, value = "chunk") Integer chunk
-        ){
+    public String plupload(@RequestParam MultipartFile file, HttpServletRequest request, HttpSession session){
         try {
 //            String fileName = file.getOriginalFilename();
             String fileName = request.getParameter("name");
@@ -150,5 +151,13 @@ public class FileUploadController {
                 logger.error(e.getMessage());
             }
         }
+    }
+
+    @RequestMapping(value = "/file/download")
+    public ModelAndView fileDown(@RequestParam String filePath, HttpServletRequest request) throws Exception{
+        File file= new File(filePath);
+
+        // viewName : bean Setting, modelName : download Logic
+        return new ModelAndView("fileDownload","downloadFile",file);
     }
 }

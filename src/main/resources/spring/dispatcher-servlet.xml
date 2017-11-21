@@ -41,7 +41,17 @@
     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="prefix" value="/WEB-INF/views/"/>
         <beans:property name="suffix" value=".jsp"/>
+        <beans:property name="order" value="1"/>
     </beans:bean>
+
+    <!-- BeanNameViewResolver : view와 동일한 이름을 갖는 bean 을 view 객체로 사용
+                                custom view 클래스인 fileDown을 view로 사용하기 떄문에 mapping-->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+        <property name="order" value="0"/>
+    </bean>
+
+    <!-- custom view class -->
+    <bean id ="fileDownload" class="com.travailler.common.FileDownload"/>
 
     <beans:bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
     <bean id="tilesConfigurer"
