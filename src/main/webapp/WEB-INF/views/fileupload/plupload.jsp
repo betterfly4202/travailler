@@ -24,9 +24,7 @@
 
         <script type="text/javascript">
             $(function() {
-                // Setup html5 version
                 $("#html5_uploader").pluploadQueue({
-                    // General settings
                     runtimes : 'html5,flash,silverlight,html4',
                     url : "<c:url value="/plupload/file"/>",
                     chunk_size : '10mb',
