@@ -53,7 +53,7 @@
             Your browser doesn't support native upload.
         </div>
 
-        <a href="<c:url value="/file/download?filePath=C:/Users/gmedia/Desktop/1UKp7.png"/>">다운로드</a>
+        <a href="<c:url value="/file/download?filePath=C:/Users/gmedia/Desktop/SQL.Server.2008.Full.Setup.zip"/>">다운로드</a>
 
        </tiles:putAttribute>
 </tiles:insertDefinition>
