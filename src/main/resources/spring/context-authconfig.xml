@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans
-		xmlns="http://www.springframework.org/schema/beans"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-		xmlns:util="http://www.springframework.org/schema/util"
-		xmlns:sec="http://www.springframework.org/schema/security" xmlns:oauth="http://www.springframework.org/schema/c"
-		xmlns:mvc="http://www.springframework.org/schema/mvc"
-		xmlns:context="http://www.springframework.org/schema/context"
-		xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:oauth="http://www.springframework.org/schema/security/oauth2"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
-	http://www.springframework.org/schema/jdbc
-	http://www.springframework.org/schema/jdbc/spring-jdbc-4.1.xsd
-	http://www.springframework.org/schema/util
- 	http://www.springframework.org/schema/util/spring-util-4.1.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-    
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.1.xsd
+	http://www.springframework.org/schema/security/oauth2 http://www.springframework.org/schema/security/spring-security-oauth2-1.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+	">
+
 	<sec:http pattern="/oauth/token" create-session="stateless" authentication-manager-ref="authenticationManager">
 		<sec:intercept-url pattern="/oauth/token" access="IS_AUTHENTICATED_FULLY"/>
 		<sec:anonymous enabled="false"/>
@@ -31,41 +33,41 @@
 	</sec:http>
 
 	<bean id="oauthAuthenticationEntryPoint"
-			class="org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint">
+		  class="org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint">
 	</bean>
 
 	<bean id="clientAuthenticationEntryPoint"
-			class="org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint">
+		  class="org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint">
 		<property name="realmName" value="springsec/client" />
 		<property name="typeName" value="Basic" />
 	</bean>
 
 	<bean id="oauthAccessDeniedHandler"
-			class="org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler">
+		  class="org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler">
 	</bean>
 
 	<bean id="clientCredentialsTokenEndpointFilter"
-			class="org.springframework.security.oauth2.provider.client.ClientCredentialsTokenEndpointFilter">
-	<property name="authenticationManager" ref="authenticationManager" />
+		  class="org.springframework.security.oauth2.provider.client.ClientCredentialsTokenEndpointFilter">
+		<property name="authenticationManager" ref="authenticationManager" />
 	</bean>
 
 	<sec:authentication-manager alias="authenticationManager">
-	<sec:authentication-provider user-service-ref="clientDetailsUserService" />
+		<sec:authentication-provider user-service-ref="clientDetailsUserService" />
 	</sec:authentication-manager>
 
 	<bean id="clientDetailsUserService"
-			class="org.springframework.security.oauth2.provider.client.ClientDetailsUserDetailsService">
+		  class="org.springframework.security.oauth2.provider.client.ClientDetailsUserDetailsService">
 		<constructor-arg ref="clientDetails" />
 	</bean>
 	<bean id="clientDetails" class="com.travailler.oauth.service.OAuthServiceImpl">
-		<property name="id" value="samplecompanyid" />
-		<property name="secretKey" value="samplecompanykey" />
+		<property name="id" value="vuKz8yU6FrnDejwirzXXUIUJqImxOoofd4aiqQIYiVEJdcsLezq1yFCtA9Kcz" />
+		<property name="secretKey" value="A4O1QBVC8pzjbrZHG0twQJjBqFt8b9ZOuSqCONrUhqnT8PJhXc0yPgRR5TNb2" />
 	</bean>
 	<sec:authentication-manager id="userAuthenticationManager">
-	<sec:authentication-provider ref="customUserAuthenticationProvider" />
-			</sec:authentication-manager>
+		<sec:authentication-provider ref="customUserAuthenticationProvider" />
+	</sec:authentication-manager>
 	<bean id="customUserAuthenticationProvider"
-			class="com.travailler.oauth.service.UserAuthenticationProvider">
+		  class="com.travailler.oauth.service.UserAuthenticationProvider">
 	</bean>
 
 	<oauth:authorization-server client-details-service-ref="clientDetails" token-services-ref="tokenServices">
@@ -80,7 +82,7 @@
 
 	<bean id="tokenStore"  class="org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore" />
 	<bean id="tokenServices"
-			class="org.springframework.security.oauth2.provider.token.DefaultTokenServices">
+		  class="org.springframework.security.oauth2.provider.token.DefaultTokenServices">
 		<property name="tokenStore" ref="tokenStore" />
 		<property name="supportRefreshToken" value="true" />
 		<property name="accessTokenValiditySeconds" value="120"></property>
