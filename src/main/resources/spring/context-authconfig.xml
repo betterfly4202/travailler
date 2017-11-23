@@ -60,8 +60,7 @@
 		<constructor-arg ref="clientDetails" />
 	</bean>
 	<bean id="clientDetails" class="com.travailler.oauth.service.OAuthServiceImpl">
-		<property name="id" value="vuKz8yU6FrnDejwirzXXUIUJqImxOoofd4aiqQIYiVEJdcsLezq1yFCtA9Kcz" />
-		<property name="secretKey" value="A4O1QBVC8pzjbrZHG0twQJjBqFt8b9ZOuSqCONrUhqnT8PJhXc0yPgRR5TNb2" />
+
 	</bean>
 	<sec:authentication-manager id="userAuthenticationManager">
 		<sec:authentication-provider ref="customUserAuthenticationProvider" />
