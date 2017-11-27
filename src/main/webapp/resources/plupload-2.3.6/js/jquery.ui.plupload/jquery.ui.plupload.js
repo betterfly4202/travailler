@@ -256,8 +256,8 @@ function renderUI(obj) {
 							'<div class="plupload_clearer">&nbsp;</div>' +
 						'</div>' +
 					'</td>' +
-					'<td class="plupload_file_status"><span class="plupload_total_status">0%</span></td>' +
-					'<td class="plupload_file_size"><span class="plupload_total_file_size">0 kb</span></td>' +
+					'<td class="plupload_file_status"><span class="plupload_total_status">0 %</span></td>' +
+					'<td class="plupload_file_size"><span class="plupload_total_file_size">0 MB</span></td>' +
 					'<td class="plupload_file_action"></td>' +
 				'</tr>' +
 				'</table>' +

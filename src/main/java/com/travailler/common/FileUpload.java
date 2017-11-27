@@ -15,9 +15,9 @@ public class FileUpload {
 
     private static final int BUFFER_SIZE = 100 * 1024;
 
-    public void plFileUpload(MultipartFile file, String filePath, HttpServletRequest request){
+    public void plFileUpload(MultipartFile file, String filePath, String fileName, HttpServletRequest request){
         try {
-            String fileName = file.getOriginalFilename();
+//            String fileName = file.getOriginalFilename();
 //            String fileName = request.getParameter("name");
 
             Integer chunk = 0, chunks = 0;

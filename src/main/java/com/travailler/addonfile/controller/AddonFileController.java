@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
+import java.io.*;
 
 /**
  * Created by betterFLY on 2017-11-21.
@@ -35,10 +35,11 @@ public class AddonFileController {
     // https://github.com/biezhi/springmvc-plupload/blob/master/src/main/java/com/plupload/controller/PluploadController.java
     @RequestMapping(value = "/plupload/file", method= RequestMethod.POST)
     public @ResponseBody String plupload(@RequestParam MultipartFile file,
+                                         @RequestParam("name") String fileName,
                            HttpServletRequest request, HttpSession session){
         String filePath = propertiesValue.file_addonfile_save_path;
         FileUpload fl = new FileUpload();
-        fl.plFileUpload(file,filePath,request);
+        fl.plFileUpload(file,filePath, fileName, request);
         return "UPLOAD_SUCCESS";
     }
 

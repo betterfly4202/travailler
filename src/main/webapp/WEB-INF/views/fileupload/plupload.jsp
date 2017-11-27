@@ -14,7 +14,8 @@
         <!-- production -->
         <script type="text/javascript" src="<c:url value="/resources/plupload-2.3.6/js/plupload.full.min.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/plupload-2.3.6/js/jquery.ui.plupload/jquery.ui.plupload.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/plupload-2.3.6/js/jquery.plupload.queue/jquery.plupload.queue.min.js"/>"></script>
+        <%--<script type="text/javascript" src="<c:url value="/resources/plupload-2.3.6/js/jquery.plupload.queue/jquery.plupload.queue.min.js"/>"></script>--%>
+        <script type="text/javascript" src="<c:url value="/resources/plupload-2.3.6/js/jquery.plupload.queue/jquery.plupload.queue.js"/>"></script>
 
         <!-- debug
         <script type="text/javascript" src="../../js/moxie.js"></script>
@@ -24,13 +25,11 @@
 
         <script type="text/javascript">
             $(function() {
-                $("#html5_uploader").pluploadQueue({
+                $("#uploader").pluploadQueue({
                     runtimes : 'html5,flash,silverlight,html4',
                     url : "<c:url value="/plupload/file"/>",
                     chunk_size : '10mb',
-                    send_chunk_number: false,
-                    rename : true,
-                    unique_names : true,
+                    rename: true,
                     resize : {width : 320, height : 240, quality : 90},
                     flash_swf_url : '<c:url value="/resources/plupload-2.3.6/js/Moxie.swf"/>',
                     silverlight_xap_url :'<c:url value="/resources/plupload-2.3.6/js/Moxie.xap"/>',
@@ -44,12 +43,59 @@
                     }
                 });
             });
+
+
+            <%--$(function() {--%>
+                <%--$("#uploader").plupload({--%>
+                    <%--// General settings--%>
+                    <%--runtimes : 'html5,flash,silverlight,html4',--%>
+                    <%--url : "<c:url value="/plupload/file"/>",--%>
+
+                    <%--// Maximum file size--%>
+                    <%--max_file_size : '5120mb',--%>
+                    <%--chunk_size: '1mb',--%>
+
+                    <%--// Resize images on clientside if we can--%>
+                    <%--resize : {--%>
+                        <%--width : 200,--%>
+                        <%--height : 200,--%>
+                        <%--quality : 90,--%>
+                        <%--crop: true // crop to exact dimensions--%>
+                    <%--},--%>
+
+                    <%--// Specify what files to browse for--%>
+                    <%--filters : [--%>
+                        <%--{title : "Image files", extensions : "jpg,gif,png"},--%>
+                        <%--{title : "Video files", extensions : "mp4"},--%>
+                        <%--{title : "Text files", extensions : "txt"},--%>
+                        <%--{title : "Zip files", extensions : "zip,avi"}--%>
+                    <%--],--%>
+
+                    <%--// Rename files by clicking on their titles--%>
+                    <%--rename: true,--%>
+
+                    <%--// Sort files--%>
+                    <%--sortable: true,--%>
+                    <%--dragdrop: true,--%>
+
+                    <%--// Views to activate--%>
+                    <%--views: {--%>
+                        <%--list: true,--%>
+                        <%--thumbs: true, // Show thumbs--%>
+                        <%--active: 'thumbs'--%>
+                    <%--},--%>
+
+                    <%--flash_swf_url : '<c:url value="/resources/plupload-2.3.6/js/Moxie.swf"/>',--%>
+                    <%--silverlight_xap_url :'<c:url value="/resources/plupload-2.3.6/js/Moxie.xap"/>',--%>
+                <%--});--%>
+            <%--});--%>
+
         </script>
 
     </tiles:putAttribute>
     <tiles:putAttribute name="contentBody">
         <h3>HTML 5 runtime</h3>
-        <div id="html5_uploader">
+        <div id="uploader">
             Your browser doesn't support native upload.
         </div>
 

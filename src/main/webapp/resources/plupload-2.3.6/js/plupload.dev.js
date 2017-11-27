@@ -637,25 +637,25 @@ var plupload = {
 
 		// TB
 		if (size > boundary) {
-			return round(size / boundary, 1) + " " + plupload.translate('tb');
+			return round(size / boundary, 1) + " " + plupload.translate('TB');
 		}
 
 		// GB
 		if (size > (boundary/=1024)) {
-			return round(size / boundary, 1) + " " + plupload.translate('gb');
+			return round(size / boundary, 1) + " " + plupload.translate('GB');
 		}
 
 		// MB
 		if (size > (boundary/=1024)) {
-			return round(size / boundary, 1) + " " + plupload.translate('mb');
+			return round(size / boundary, 1) + " " + plupload.translate('MB');
 		}
 
 		// KB
 		if (size > 1024) {
-			return Math.round(size / 1024) + " " + plupload.translate('kb');
+			return Math.round(size / 1024) + " " + plupload.translate('KB');
 		}
 
-		return size + " " + plupload.translate('b');
+		return size + " " + plupload.translate('Byte');
 	},
 
 

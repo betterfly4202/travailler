@@ -96,17 +96,17 @@ used as it is.
 					'<div class="plupload">' +
 						'<div class="plupload_header">' +
 							'<div class="plupload_header_content">' +
-								'<div class="plupload_header_title">' + _('Select files') + '</div>' +
+								'<div class="plupload_header_title">' + _('CMS File uploader') + '</div>' +
 								'<div class="plupload_header_text">' + _('Add files to the upload queue and click the start button.') + '</div>' +
 							'</div>' +
 						'</div>' +
 
 						'<div class="plupload_content">' +
 							'<div class="plupload_filelist_header">' +
-								'<div class="plupload_file_name">' + _('Filename') + '</div>' +
+								'<div class="plupload_file_name">' + _('파일명') + '</div>' +
 								'<div class="plupload_file_action">&nbsp;</div>' +
-								'<div class="plupload_file_status"><span>' + _('Status') + '</span></div>' +
-								'<div class="plupload_file_size">' + _('Size') + '</div>' +
+								'<div class="plupload_file_status"><span>' + _('상태') + '</span></div>' +
+								'<div class="plupload_file_size">' + _('크기') + '</div>' +
 								'<div class="plupload_clearer">&nbsp;</div>' +
 							'</div>' +
 
@@ -122,7 +122,7 @@ used as it is.
 								'</div>' +
 								'<div class="plupload_file_action"></div>' +
 								'<div class="plupload_file_status"><span class="plupload_total_status">0%</span></div>' +
-								'<div class="plupload_file_size"><span class="plupload_total_file_size">0 b</span></div>' +
+								'<div class="plupload_file_size"><span class="plupload_total_file_size">0 Byte</span></div>' +
 								'<div class="plupload_progress">' +
 									'<div class="plupload_progress_container">' +
 										'<div class="plupload_progress_bar"></div>' +
@@ -134,6 +134,7 @@ used as it is.
 					'</div>' +
 				'</div>' +
 				'<input type="hidden" id="' + id + '_count" name="' + id + '_count" value="0" />' +
+
 			'</div>'
 		);
 	}
