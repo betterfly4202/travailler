@@ -30,7 +30,7 @@
                     url : "<c:url value="/plupload/file"/>",
                     chunk_size : '10mb',
                     rename: true,
-                    resize : {width : 320, height : 240, quality : 90},
+                    resize : {width : 200, height : 240, quality : 100},
                     flash_swf_url : '<c:url value="/resources/plupload-2.3.6/js/Moxie.swf"/>',
                     silverlight_xap_url :'<c:url value="/resources/plupload-2.3.6/js/Moxie.xap"/>',
                     filters : {
@@ -44,47 +44,33 @@
                 });
             });
 
-
             <%--$(function() {--%>
                 <%--$("#uploader").plupload({--%>
-                    <%--// General settings--%>
                     <%--runtimes : 'html5,flash,silverlight,html4',--%>
                     <%--url : "<c:url value="/plupload/file"/>",--%>
 
-                    <%--// Maximum file size--%>
                     <%--max_file_size : '5120mb',--%>
                     <%--chunk_size: '1mb',--%>
-
-                    <%--// Resize images on clientside if we can--%>
                     <%--resize : {--%>
                         <%--width : 200,--%>
                         <%--height : 200,--%>
                         <%--quality : 90,--%>
                         <%--crop: true // crop to exact dimensions--%>
                     <%--},--%>
-
-                    <%--// Specify what files to browse for--%>
                     <%--filters : [--%>
                         <%--{title : "Image files", extensions : "jpg,gif,png"},--%>
                         <%--{title : "Video files", extensions : "mp4"},--%>
                         <%--{title : "Text files", extensions : "txt"},--%>
                         <%--{title : "Zip files", extensions : "zip,avi"}--%>
                     <%--],--%>
-
-                    <%--// Rename files by clicking on their titles--%>
                     <%--rename: true,--%>
-
-                    <%--// Sort files--%>
                     <%--sortable: true,--%>
                     <%--dragdrop: true,--%>
-
-                    <%--// Views to activate--%>
                     <%--views: {--%>
                         <%--list: true,--%>
                         <%--thumbs: true, // Show thumbs--%>
                         <%--active: 'thumbs'--%>
                     <%--},--%>
-
                     <%--flash_swf_url : '<c:url value="/resources/plupload-2.3.6/js/Moxie.swf"/>',--%>
                     <%--silverlight_xap_url :'<c:url value="/resources/plupload-2.3.6/js/Moxie.xap"/>',--%>
                 <%--});--%>

@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
 /**
@@ -15,12 +16,10 @@ public class FileUpload {
 
     private static final int BUFFER_SIZE = 100 * 1024;
 
-    public void plFileUpload(MultipartFile file, String filePath, String fileName, HttpServletRequest request){
+    public void plFileUpload(MultipartFile file, String filePath, String fileName, HttpServletRequest request, HttpServletResponse response){
         try {
-//            String fileName = file.getOriginalFilename();
-//            String fileName = request.getParameter("name");
-
             Integer chunk = 0, chunks = 0;
+            response.getHeader("chunks");
             if(null != request.getParameter("chunk") && !request.getParameter("chunk").equals("")){
                 chunk = Integer.valueOf(request.getParameter("chunk"));
             }
@@ -38,7 +37,8 @@ public class FileUpload {
                 destFile.delete();
                 destFile = new File(folder, fileName);
             }
-            appendFile(file.getInputStream(), destFile);
+            appendFile(file.getInputStream(), destFile, response);
+
             if (chunk == chunks - 1) {
                 logger.info("upload success !");
             }else {
@@ -50,7 +50,8 @@ public class FileUpload {
         }
     }
 
-    public void appendFile(InputStream in, File destFile) {
+    public void appendFile(InputStream in, File destFile, HttpServletResponse response) {
+
         OutputStream out = null;
         try {
             if (destFile.exists()) {
@@ -67,7 +68,8 @@ public class FileUpload {
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
-        } finally {
+        }
+        finally {
             try {
                 if (null != in) {
                     in.close();
