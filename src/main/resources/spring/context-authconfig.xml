@@ -60,7 +60,8 @@
 		<constructor-arg ref="clientDetails" />
 	</bean>
 	<bean id="clientDetails" class="com.travailler.oauth.service.OAuthServiceImpl">
-
+		<property name="id" value="${korbit.client.appId}" />
+		<property name="secretKey" value="${korbit.client.appSecret}"/>
 	</bean>
 	<sec:authentication-manager id="userAuthenticationManager">
 		<sec:authentication-provider ref="customUserAuthenticationProvider" />

@@ -28,4 +28,6 @@ public class UserAuthenticationToken extends AbstractAuthenticationToken {
     public Object getCredentials() {
         return credentials;
     }
+
+
 }

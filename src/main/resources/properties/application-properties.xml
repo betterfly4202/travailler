@@ -7,6 +7,9 @@
         <entry key="spring.social.google.appId">ENC(D/mbxyWs4ntkYwOyFO28f6jpt5WoZzLn2MncpOK3DF9i6cv7s+Ch3n8WPQM3IRypbPXb6atdMuCrgJ1porq63nHeWUsrrBQhmC8DfEW4UR46KvkGWaIDMg==)</entry>
         <entry key="spring.social.google.appSecret">ENC(BKbmrCjEj7QhVugyY0EvQwXS9R7OpRddVXagG8z2DkkEqWqziMqWlw==)</entry>
 
+        <entry key="korbit.client.appId">ENC(jeFBox3l7ai9du8N2n0lNOTgfhBylZsLioel+EILiWL/csUu+d3BYRNSphSRYEDLW9yUcBgzaYVrq40NsCD60qBtdJXq5b59)</entry>
+        <entry key="korbit.client.appSecret">ENC(S5aDZd/jP4y1sBbfETGUmfNIrFa2jAzqCiiMCTDN8+TWylBeBqxzBjb5T/vJ5pEK9z+rENkEOKco+C5ifCPpssu0/YojkbU9)</entry>
+
         <entry key="dataSource.driverClassName">core.log.jdbc.driver.OracleDriver</entry>
         <entry key="dataSource.url">ENC(4I1ttrjESFzK16gaGM7bg834A7aupbKsIKSr2sfkAgjnI3CkXJHVQxJZ9F3rwfvR1G/jUQ1OroY=)</entry>
         <entry key="dataSource.username">ENC(+CBHAC86DdtPSgxsJ3WV1gSMET0SJEzq)</entry>
