@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface CafeinfoService {
     List<CommonCodeVO> getCommonCode();
+    List<CommonCodeVO> getDetailCommonCode(String comCode);
 }

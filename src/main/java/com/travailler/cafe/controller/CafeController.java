@@ -5,8 +5,7 @@ import com.travailler.cafe.service.CafeinfoService;
 import com.travailler.common.bean.CommonCodeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -26,11 +25,16 @@ public class CafeController {
             @ModelAttribute("cafeInfoVO")CafeInfoVO cafeInfoVO){
         ModelAndView mav = new ModelAndView("/cafe/cafe_add");
 
-        List<CommonCodeVO> codeList = service.getCommonCode();
-
-        mav.addObject("codeList",codeList);
-
+        List<CommonCodeVO> areaCodeList = service.getCommonCode();
+        mav.addObject("areaCodeList",areaCodeList);
         return mav;
     }
 
+
+    @RequestMapping(value = "/select/detailArea", method = RequestMethod.POST)
+    public @ResponseBody List<CommonCodeVO> areaDetailList(
+            @RequestParam("comCode")String comCode){
+        List<CommonCodeVO> detailCodeList = service.getDetailCommonCode(comCode);
+        return detailCodeList;
+    }
 }

@@ -36,4 +36,21 @@ public class CafeInfoServiceImpl implements CafeinfoService{
 
         return resultList;
     }
+
+
+    @Override
+    public List<CommonCodeVO> getDetailCommonCode(String comCode){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("p_id", comCode);
+
+        List<CommonCodeEntity> entList = dao.selectCommonCode(map);
+        List<CommonCodeVO> resultList = new ArrayList<CommonCodeVO>();
+
+        for(int i=0; i <entList.size(); i++){
+            CommonCodeEntity ent = entList.get(i);
+            resultList.add(ent.convertCommonVO());
+        }
+
+        return resultList;
+    }
 }

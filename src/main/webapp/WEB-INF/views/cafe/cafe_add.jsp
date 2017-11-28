@@ -19,8 +19,32 @@
 
         <script>
             $(function(){
+                var selectId = $("#areaCode option:selected").val();
+                var selectName = $("select[name=areaCode]").val();
+                alert("시작할때 : "+selectName +" /// "+ selectId);
 
             });
+
+
+            function fn_callDetailCode(){
+
+                var selectId = $("#areaCode option:selected").val();
+                var selectName = $("select[name=areaCode]").val();
+
+                alert(selectName +" /// "+ selectId);
+
+                <%--$.ajax({--%>
+                    <%--type: "POST",--%>
+                    <%--data: {--%>
+                        <%--comCode : $("#areaCode").val()--%>
+                    <%--},--%>
+                    <%--url: "<c:url value="/select/detailArea"/>"--%>
+                <%--}).done(function (data){--%>
+                    <%--console.log(data);--%>
+                    <%--alert("수정 되었습니다.");--%>
+                <%--});--%>
+            }
+
         </script>
 
     </tiles:putAttribute>
@@ -50,9 +74,19 @@
                 </td>
             </tr>
             <tr>
-                <td class="tg-yw4l">주제</td>
+                <td class="tg-yw4l">지역</td>
                 <td class="tg-yw4l">
-                    <form:input type="text" path="caTopic"/>
+                    <select onchange="fn_callDetailCode()">
+                        <option>지역을 선택해주세요</option>
+                        <c:forEach items="${areaCodeList}" var="items">
+                        <option id="areaCode" name="areaCode" value="${items.comId}">${items.comValue}</option>
+                        </c:forEach>
+                    </select>
+                    <select>
+                        <option>
+
+                        </option>
+                    </select>
                 </td>
             </tr>
             <tr>
