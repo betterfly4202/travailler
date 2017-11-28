@@ -19,7 +19,6 @@ public class FileUpload {
     public void plFileUpload(MultipartFile file, String filePath, String fileName, HttpServletRequest request, HttpServletResponse response){
         try {
             Integer chunk = 0, chunks = 0;
-            response.getHeader("chunks");
             if(null != request.getParameter("chunk") && !request.getParameter("chunk").equals("")){
                 chunk = Integer.valueOf(request.getParameter("chunk"));
             }
