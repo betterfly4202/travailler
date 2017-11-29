@@ -19,32 +19,25 @@
 
         <script>
             $(function(){
-                var selectId = $("#areaCode option:selected").val();
-                var selectName = $("select[name=areaCode]").val();
-                alert("시작할때 : "+selectName +" /// "+ selectId);
 
             });
 
-
             function fn_callDetailCode(){
-
-                var selectId = $("#areaCode option:selected").val();
-                var selectName = $("select[name=areaCode]").val();
-
-                alert(selectName +" /// "+ selectId);
-
-                <%--$.ajax({--%>
-                    <%--type: "POST",--%>
-                    <%--data: {--%>
-                        <%--comCode : $("#areaCode").val()--%>
-                    <%--},--%>
-                    <%--url: "<c:url value="/select/detailArea"/>"--%>
-                <%--}).done(function (data){--%>
-                    <%--console.log(data);--%>
-                    <%--alert("수정 되었습니다.");--%>
-                <%--});--%>
+                $("#detailArea").empty();
+                $("#detailArea").append("<option>"+'상세지역을 선택해주세요'+"</option>");
+                var selectArea = $("#selectArea").val();
+                $.ajax({
+                    type: "POST",
+                    data: {
+                        comCode : selectArea
+                    },
+                    url: "<c:url value="/select/detailArea"/>"
+                }).success(function (data){
+                    for(var i in data){
+                        $("#detailArea").append("<option value='"+data[i].comCode+"'>"+data[i].comValue+"</option>");
+                    }
+                });
             }
-
         </script>
 
     </tiles:putAttribute>
@@ -76,16 +69,14 @@
             <tr>
                 <td class="tg-yw4l">지역</td>
                 <td class="tg-yw4l">
-                    <select onchange="fn_callDetailCode()">
+                    <select id="selectArea" onchange="fn_callDetailCode()">
                         <option>지역을 선택해주세요</option>
                         <c:forEach items="${areaCodeList}" var="items">
-                        <option id="areaCode" name="areaCode" value="${items.comId}">${items.comValue}</option>
+                        <option value="${items.comId}">${items.comValue}</option>
                         </c:forEach>
                     </select>
-                    <select>
-                        <option>
-
-                        </option>
+                    <select id="detailArea">
+                        <option  value="">상세 지역을 선택해주세요</option>
                     </select>
                 </td>
             </tr>

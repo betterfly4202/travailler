@@ -31,13 +31,8 @@ public class FileDownload extends AbstractView {
     @Override
     protected void renderMergedOutputModel(Map<String, Object> map, HttpServletRequest request, HttpServletResponse response) throws Exception{
        File file = (File)map.get("downloadFile");
-        String fileName = file.getName();
-
-        response.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\";");
-        response.setHeader("Content-Transfer-Encoding","binary");
-
         OutputStream out = response.getOutputStream();
-        FileInputStream fis = null;
+        FileInputStream fis;
 
         try {
             fis = new FileInputStream(file);

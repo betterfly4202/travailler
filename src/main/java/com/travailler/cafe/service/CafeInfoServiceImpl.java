@@ -33,7 +33,6 @@ public class CafeInfoServiceImpl implements CafeinfoService{
             CommonCodeEntity ent = entList.get(i);
             resultList.add(ent.convertCommonVO());
         }
-
         return resultList;
     }
 
@@ -50,7 +49,6 @@ public class CafeInfoServiceImpl implements CafeinfoService{
             CommonCodeEntity ent = entList.get(i);
             resultList.add(ent.convertCommonVO());
         }
-
         return resultList;
     }
 }
