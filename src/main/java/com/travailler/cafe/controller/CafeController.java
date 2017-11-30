@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,7 +22,7 @@ import java.util.Map;
  */
 
 @Controller
-public class CafeController extends BaseController{
+public class CafeController extends BaseController {
 
     @Autowired
     private CafeinfoService service;
@@ -50,13 +51,15 @@ public class CafeController extends BaseController{
 
 
     @RequestMapping(value ="/create/cafe", method = RequestMethod.POST)
-    public ModelAndView createCate(
+    public ModelAndView createCafe(
             HttpServletRequest request,
             @ModelAttribute("cafeInfoVO")CafeInfoVO cafeInfoVO){
-        ModelAndView mav = new ModelAndView("");
+//        ModelAndView mav;
         cafeInfoVO.setUserSeq(this.getUserInfo(request).getUserSeq());
-        service.createCate(cafeInfoVO);
-
-        return mav;
+        int result = service.createCate(cafeInfoVO);
+        if(result>0)
+            return new ModelAndView("/main");
+        else
+            return new ModelAndView("/main");
     }
 }

@@ -7,7 +7,6 @@
     <resultMap id="resultCafeInfo" type="com.travailler.cafe.entity.CafeInfoEntity">
         <result property="ca_seq"              column="CA_SEQ"   />
         <result property="user_seq"            column="USER_SEQ" />
-        <result property="cate_seq"            column="CATE_SEQ" />
         <result property="ca_url"              column="CA_URL"   />
         <result property="ca_name"             column="CA_NAME"  />
         <result property="ca_public_yn"        column="CA_PUBLIC_YN"  />
@@ -20,8 +19,8 @@
     </resultMap>
 
     <insert id="insertCafeInfo">
-        INSERT INTO CAFE_INFO(CA_SEQ, USER_SEQ, CATE_SEQ, CA_URL, CA_NAME, CA_PUBLIC_YN, CA_TOPIC, CA_AREA, CA_TAG, CA_CREATE_DATE, CA_DESC, CA_IMG)
-             VALUES (CAFE_INFO_SEQ.NEXTVAL, #{user_seq}, #{cate_seq}, #{ca_url}, #{ca_name}, #{ca_public_yn}, #{ca_topic}, #{ca_area}, CAFE_TAG_SEQ.NEXTVAL, SYSDATE,  #{ca_desc}, #{ca_img})
+        INSERT INTO CAFE_INFO(CA_SEQ, USER_SEQ, CA_URL, CA_NAME, CA_PUBLIC_YN, CA_TOPIC, CA_AREA, CA_TAG, CA_CREATE_DATE, CA_DESC, CA_IMG)
+             VALUES (CAFE_INFO_SEQ.NEXTVAL, #{user_seq}, #{ca_url}, #{ca_name}, #{ca_public_yn}, #{ca_topic}, #{ca_area}, CAFE_TAG_SEQ.NEXTVAL, SYSDATE,  #{ca_desc}, #{ca_img})
     </insert>
 
     <resultMap id="resultCommonCode" type="com.travailler.common.entity.CommonCodeEntity">

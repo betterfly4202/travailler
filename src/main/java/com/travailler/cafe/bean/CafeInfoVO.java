@@ -6,7 +6,6 @@ package com.travailler.cafe.bean;
 public class CafeInfoVO {
     private String caSeq;
     private String userSeq;
-    private String cateSeq;
     private String caUrl;
     private String caName;
     private String caPublicYn;
@@ -47,14 +46,6 @@ public class CafeInfoVO {
 
     public void setUserSeq(String userSeq) {
         this.userSeq = userSeq;
-    }
-
-    public String getCateSeq() {
-        return cateSeq;
-    }
-
-    public void setCateSeq(String cateSeq) {
-        this.cateSeq = cateSeq;
     }
 
     public String getCaUrl() {

@@ -20,13 +20,18 @@
         <script>
             $(function(){
 
+//                $("#cafeInfoForm").on("submit", function() {
+////                    var datas = $(this).serialize();
+//                    alert("등록되었습니다");
+//                    return false;
+//                });
             });
 
 
             //카페 지역선택
             function fn_callAreaDetail(){
                 $("#caArea").empty();
-                $("#caArea").append("<option>"+'상세지역을 선택해주세요'+"</option>");
+                $("#caArea").append("<option value='0'>"+'상세지역을 선택해주세요'+"</option>");
                 var selectArea = $("#selectArea").val();
                 $.ajax({
                     type: "POST",
@@ -45,7 +50,7 @@
             //카페 주제선택
             function fn_callSujbectDetail(){
                 $("#caTopic").empty();
-                $("#caTopic").append("<option value='0' >"+'상세주제를 선택해주세요'+"</option>");
+                $("#caTopic").append("<option value='0'>"+'상세주제를 선택해주세요'+"</option>");
                 var selectSubject = $("#selectTopic").val();
                 $.ajax({
                     type: "POST",
@@ -66,16 +71,18 @@
                 console.log($("#caArea option:selected").val());
                 console.log($("#caTopic option:selected").val());
 
-                if($("#caArea option:selected").val() == 0 || $("#caArea option:selected").val()==null){
-                    alert("지역을 선택해주세요.");
-                    return;
-                }
                 if($("#caTopic option:selected").val() == 0 || $("#caTopic option:selected").val()==null){
                     alert("주제를 선택해주세요.");
                     return;
                 }
-                <%--$("#cafeInfoForm").attr("action", "<c:url value="/create/cafe"/>");--%>
-                <%--$("#cafeInfoForm").submit();--%>
+                if($("#caArea option:selected").val() == 0 || $("#caArea option:selected").val()==null){
+                    alert("지역을 선택해주세요.");
+                    return;
+                }
+                $("#cafeInfoForm").attr("action", "<c:url value="/create/cafe"/>");
+                $("#cafeInfoForm").submit();
+
+
             }
 
         </script>
@@ -117,7 +124,7 @@
                         </c:forEach>
                     </select>
                     <form:select path="caTopic">
-                        <option>상세 주제를 선택해주세요</option>
+                        <option value="0">상세 주제를 선택해주세요</option>
                     </form:select>
                 </td>
             </tr>
@@ -132,7 +139,7 @@
                         </c:forEach>
                     </select>
                     <form:select path="caArea">
-                        <option>상세 지역을 선택해주세요</option>
+                        <option value="0">상세 지역을 선택해주세요</option>
                     </form:select>
                 </td>
             </tr>
@@ -155,8 +162,8 @@
                 </td>
             </tr>
         </table>
-
-        <button type="button" onclick="fn_createCafe()">만들기</button>
+        <%--<button type="submit">만들기</button>--%>
+        <button type="submit" onclick="fn_createCafe()">만들기</button>
         <button type="button" onclick="history.back()">취소</button>
         </form:form>
     </tiles:putAttribute>

@@ -71,11 +71,11 @@ public class CafeInfoServiceImpl implements CafeinfoService{
     public int createCate(CafeInfoVO cafeInfoVO){
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("user_seq",cafeInfoVO.getUserSeq());
-        map.put("cate_seq",cafeInfoVO.getCateSeq());
         map.put("ca_url",cafeInfoVO.getCaUrl());
         map.put("ca_name",cafeInfoVO.getCaName());
         map.put("ca_public_yn",cafeInfoVO.getCaPublicYn());
         map.put("ca_topic",cafeInfoVO.getCaTopic());
+        map.put("ca_area",cafeInfoVO.getCaArea());
         map.put("ca_desc",cafeInfoVO.getCaDesc());
         map.put("ca_img",cafeInfoVO.getCaImg());
 

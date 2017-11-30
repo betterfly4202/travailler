@@ -8,7 +8,6 @@ import com.travailler.cafe.bean.CafeInfoVO;
 public class CafeInfoEntity {
     private String ca_seq;
     private String user_seq;
-    private String cate_seq;
     private String ca_url;
     private String ca_name;
     private String ca_public_yn;
@@ -24,7 +23,6 @@ public class CafeInfoEntity {
         CafeInfoVO vo = new CafeInfoVO();
         vo.setCaSeq(this.getCa_seq());
         vo.setUserSeq(this.getUser_seq());
-        vo.setCateSeq(this.getCate_seq());
         vo.setCaUrl(this.getCa_url());
         vo.setCaName(this.getCa_name());
         vo.setCaPublicYn(this.getCa_public_yn());
@@ -67,14 +65,6 @@ public class CafeInfoEntity {
 
     public void setUser_seq(String user_seq) {
         this.user_seq = user_seq;
-    }
-
-    public String getCate_seq() {
-        return cate_seq;
-    }
-
-    public void setCate_seq(String cate_seq) {
-        this.cate_seq = cate_seq;
     }
 
     public String getCa_url() {
