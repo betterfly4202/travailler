@@ -24,58 +24,58 @@
         -->
 
         <script type="text/javascript">
-            <%--$(function() {--%>
-                <%--$("#uploader").pluploadQueue({--%>
-                    <%--runtimes : 'html5,flash,silverlight,html4',--%>
-                    <%--url : "<c:url value="/plupload/file"/>",--%>
-                    <%--chunk_size : '10mb',--%>
-                    <%--rename: true,--%>
-                    <%--resize : {width : 200, height : 240, quality : 100},--%>
-                    <%--flash_swf_url : '<c:url value="/resources/plupload-2.3.6/js/Moxie.swf"/>',--%>
-                    <%--silverlight_xap_url :'<c:url value="/resources/plupload-2.3.6/js/Moxie.xap"/>',--%>
-                    <%--filters : {--%>
-                        <%--prevent_duplicates : true,--%>
-                        <%--max_file_size : '5120mb',--%>
-                        <%--mime_types: [--%>
-                            <%--{title : "Video files", extensions : "mp4"},--%>
-                            <%--{title : "Image files", extensions : "jpg,gif,png"},--%>
-                            <%--{title : "Zip files", extensions : "zip"}--%>
-                        <%--]--%>
-                    <%--}--%>
-                <%--});--%>
-            <%--});--%>
-
             $(function() {
-                $("#uploader").plupload({
+                $("#uploader").pluploadQueue({
                     runtimes : 'html5,flash,silverlight,html4',
                     url : "<c:url value="/plupload/file"/>",
-
-                    max_file_size : '5120mb',
-                    chunk_size: '1mb',
-                    resize : {
-                        width : 200,
-                        height : 200,
-                        quality : 90,
-                        crop: true // crop to exact dimensions
-                    },
-                    filters : [
-                        {title : "Image files", extensions : "jpg,gif,png"},
-                        {title : "Video files", extensions : "mp4"},
-                        {title : "Text files", extensions : "txt"},
-                        {title : "Zip files", extensions : "zip,avi"}
-                    ],
+                    chunk_size : '10mb',
                     rename: true,
-                    sortable: true,
-                    dragdrop: true,
-                    views: {
-                        list: true,
-                        thumbs: true, // Show thumbs
-                        active: 'thumbs'
-                    },
+                    resize : {width : 200, height : 240, quality : 100},
                     flash_swf_url : '<c:url value="/resources/plupload-2.3.6/js/Moxie.swf"/>',
                     silverlight_xap_url :'<c:url value="/resources/plupload-2.3.6/js/Moxie.xap"/>',
+                    filters : {
+                        prevent_duplicates : true,
+                        max_file_size : '5120mb',
+                        mime_types: [
+                            {title : "Video files", extensions : "mp4"},
+                            {title : "Image files", extensions : "jpg,gif,png"},
+                            {title : "Zip files", extensions : "zip"}
+                        ]
+                    }
                 });
             });
+
+            <%--$(function() {--%>
+                <%--$("#uploader").plupload({--%>
+                    <%--runtimes : 'html5,flash,silverlight,html4',--%>
+                    <%--url : "<c:url value="/plupload/file"/>",--%>
+
+                    <%--max_file_size : '5120mb',--%>
+                    <%--chunk_size: '1mb',--%>
+                    <%--resize : {--%>
+                        <%--width : 200,--%>
+                        <%--height : 200,--%>
+                        <%--quality : 90,--%>
+                        <%--crop: true // crop to exact dimensions--%>
+                    <%--},--%>
+                    <%--filters : [--%>
+                        <%--{title : "Image files", extensions : "jpg,gif,png"},--%>
+                        <%--{title : "Video files", extensions : "mp4"},--%>
+                        <%--{title : "Text files", extensions : "txt"},--%>
+                        <%--{title : "Zip files", extensions : "zip,avi"}--%>
+                    <%--],--%>
+                    <%--rename: true,--%>
+                    <%--sortable: true,--%>
+                    <%--dragdrop: true,--%>
+                    <%--views: {--%>
+                        <%--list: true,--%>
+                        <%--thumbs: true, // Show thumbs--%>
+                        <%--active: 'thumbs'--%>
+                    <%--},--%>
+                    <%--flash_swf_url : '<c:url value="/resources/plupload-2.3.6/js/Moxie.swf"/>',--%>
+                    <%--silverlight_xap_url :'<c:url value="/resources/plupload-2.3.6/js/Moxie.xap"/>',--%>
+                <%--});--%>
+            <%--});--%>
 
         </script>
 

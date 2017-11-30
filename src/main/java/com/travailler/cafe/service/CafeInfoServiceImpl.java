@@ -1,5 +1,6 @@
 package com.travailler.cafe.service;
 
+import com.travailler.cafe.bean.CafeInfoVO;
 import com.travailler.cafe.dao.CafeInfoMapperDao;
 import com.travailler.common.Constants;
 import com.travailler.common.bean.CommonCodeVO;
@@ -22,7 +23,7 @@ public class CafeInfoServiceImpl implements CafeinfoService{
     private CafeInfoMapperDao dao;
 
     @Override
-    public List<CommonCodeVO> getCommonCode(){
+    public List<CommonCodeVO> getAreaCode(){
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("p_id", Constants.COMMON_CODE_AREA );
 
@@ -36,9 +37,23 @@ public class CafeInfoServiceImpl implements CafeinfoService{
         return resultList;
     }
 
+    @Override
+    public List<CommonCodeVO> getSubjectCode(){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("p_id", Constants.COMMON_CODE_SUBJECT );
+
+        List<CommonCodeEntity> entList = dao.selectCommonCode(map);
+        List<CommonCodeVO> resultList = new ArrayList<CommonCodeVO>();
+
+        for(int i=0; i <entList.size(); i++){
+            CommonCodeEntity ent = entList.get(i);
+            resultList.add(ent.convertCommonVO());
+        }
+        return resultList;
+    }
 
     @Override
-    public List<CommonCodeVO> getDetailCommonCode(String comCode){
+    public List<CommonCodeVO> getAreaDetailCode(String comCode){
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("p_id", comCode);
 
@@ -51,4 +66,24 @@ public class CafeInfoServiceImpl implements CafeinfoService{
         }
         return resultList;
     }
+
+    @Override
+    public int createCate(CafeInfoVO cafeInfoVO){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("user_seq",cafeInfoVO.getUserSeq());
+        map.put("cate_seq",cafeInfoVO.getCateSeq());
+        map.put("ca_url",cafeInfoVO.getCaUrl());
+        map.put("ca_name",cafeInfoVO.getCaName());
+        map.put("ca_public_yn",cafeInfoVO.getCaPublicYn());
+        map.put("ca_topic",cafeInfoVO.getCaTopic());
+        map.put("ca_desc",cafeInfoVO.getCaDesc());
+        map.put("ca_img",cafeInfoVO.getCaImg());
+
+        int successFlag = 0;
+        successFlag = dao.insertCafeInfo(map);
+
+
+        return successFlag;
+    }
+
 }

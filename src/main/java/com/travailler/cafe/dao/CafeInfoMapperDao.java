@@ -13,4 +13,5 @@ import java.util.Map;
 @Repository
 public interface CafeInfoMapperDao {
     List<CommonCodeEntity> selectCommonCode(Map<String, Object> map);
+    int insertCafeInfo(Map<String, Object> map);
 }

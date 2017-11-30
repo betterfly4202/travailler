@@ -22,9 +22,11 @@
 
             });
 
-            function fn_callDetailCode(){
-                $("#detailArea").empty();
-                $("#detailArea").append("<option>"+'상세지역을 선택해주세요'+"</option>");
+
+            //카페 지역선택
+            function fn_callAreaDetail(){
+                $("#caArea").empty();
+                $("#caArea").append("<option>"+'상세지역을 선택해주세요'+"</option>");
                 var selectArea = $("#selectArea").val();
                 $.ajax({
                     type: "POST",
@@ -34,10 +36,48 @@
                     url: "<c:url value="/select/detailArea"/>"
                 }).success(function (data){
                     for(var i in data){
-                        $("#detailArea").append("<option value='"+data[i].comCode+"'>"+data[i].comValue+"</option>");
+                        $("#caArea").append("<option value='"+data[i].comId+"'>"+data[i].comValue+"</option>");
                     }
                 });
+
             }
+
+            //카페 주제선택
+            function fn_callSujbectDetail(){
+                $("#caTopic").empty();
+                $("#caTopic").append("<option value='0' >"+'상세주제를 선택해주세요'+"</option>");
+                var selectSubject = $("#selectTopic").val();
+                $.ajax({
+                    type: "POST",
+                    data: {
+                        comCode : selectSubject
+                    },
+                    url: "<c:url value="/select/detailArea"/>"
+                }).success(function (data){
+                    for(var i in data){
+                        $("#caTopic").append("<option value='"+data[i].comId+"'>"+data[i].comValue+"</option>");
+                    }
+
+                });
+            }
+
+            //카페 만들기
+            function fn_createCafe(){
+                console.log($("#caArea option:selected").val());
+                console.log($("#caTopic option:selected").val());
+
+                if($("#caArea option:selected").val() == 0 || $("#caArea option:selected").val()==null){
+                    alert("지역을 선택해주세요.");
+                    return;
+                }
+                if($("#caTopic option:selected").val() == 0 || $("#caTopic option:selected").val()==null){
+                    alert("주제를 선택해주세요.");
+                    return;
+                }
+                <%--$("#cafeInfoForm").attr("action", "<c:url value="/create/cafe"/>");--%>
+                <%--$("#cafeInfoForm").submit();--%>
+            }
+
         </script>
 
     </tiles:putAttribute>
@@ -66,24 +106,34 @@
                     <form:radiobutton path="caPublicYn" value="N" label="비공개"/>
                 </td>
             </tr>
+
+            <tr>
+                <td class="tg-yw4l">주제</td>
+                <td class="tg-yw4l">
+                    <select id="selectTopic" onchange="fn_callSujbectDetail()">
+                        <option>주제를 선택해주세요</option>
+                        <c:forEach items="${subjectCodeList}" var="items">
+                            <option value="${items.comId}">${items.comValue}</option>
+                        </c:forEach>
+                    </select>
+                    <form:select path="caTopic">
+                        <option>상세 주제를 선택해주세요</option>
+                    </form:select>
+                </td>
+            </tr>
+
             <tr>
                 <td class="tg-yw4l">지역</td>
                 <td class="tg-yw4l">
-                    <select id="selectArea" onchange="fn_callDetailCode()">
+                    <select id="selectArea" onchange="fn_callAreaDetail()">
                         <option>지역을 선택해주세요</option>
                         <c:forEach items="${areaCodeList}" var="items">
                         <option value="${items.comId}">${items.comValue}</option>
                         </c:forEach>
                     </select>
-                    <select id="detailArea">
-                        <option  value="">상세 지역을 선택해주세요</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td class="tg-yw4l">설명</td>
-                <td class="tg-yw4l">
-                    <form:input type="text" path="caDesc"/>
+                    <form:select path="caArea">
+                        <option>상세 지역을 선택해주세요</option>
+                    </form:select>
                 </td>
             </tr>
             <tr>
@@ -93,12 +143,21 @@
                 </td>
             </tr>
             <tr>
+                <td class="tg-yw4l">설명</td>
+                <td class="tg-yw4l">
+                    <form:textarea type="text" path="caDesc" cssStyle="width: 100%; height: 200px; resize: none"/>
+                </td>
+            </tr>
+            <tr>
                 <td class="tg-yw4l">이미지</td>
                 <td class="tg-yw4l">
                     <form:input type="text" path="caImg"/>
                 </td>
             </tr>
         </table>
+
+        <button type="button" onclick="fn_createCafe()">만들기</button>
+        <button type="button" onclick="history.back()">취소</button>
         </form:form>
     </tiles:putAttribute>
 </tiles:insertDefinition>

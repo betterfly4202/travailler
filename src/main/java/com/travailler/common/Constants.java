@@ -8,5 +8,6 @@ package com.travailler.common;
 
 public class Constants {
     public static final String COMMON_CODE_AREA = "A02"; //지역코드
+    public static final String COMMON_CODE_SUBJECT = "A03"; //주제코드
 
 }

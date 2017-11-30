@@ -11,19 +11,18 @@
         <result property="ca_url"              column="CA_URL"   />
         <result property="ca_name"             column="CA_NAME"  />
         <result property="ca_public_yn"        column="CA_PUBLIC_YN"  />
+        <result property="ca_topic"            column="CA_TOPIC" />
+        <result property="ca_area"             column="CA_AREA"  />
         <result property="ca_tag"              column="CA_TAG"   />
         <result property="ca_create_date"      column="CA_CREATE_DATE"/>
-        <result property="ca_topic"            column="CA_TOPIC" />
         <result property="ca_desc"             column="CA_DESC"  />
         <result property="ca_img"              column="CA_IMG"   />
     </resultMap>
 
     <insert id="insertCafeInfo">
-        INSERT INTO CAFE_INFO(CA_SEQ, USER_SEQ, CATE_SEQ, CA_URL, CA_NAME, CA_PUBLIC_YN, CA_TAG, CA_CREATE_DATE, CA_TOPIC, CA_DESC, CA_IMG)
-             VALUES (CAFE_INFO_SEQ.NEXTVAL, #{user_seq}, #{cate_seq}, #{ca_url}, #{ca_name}, #{ca_public_yn}, #{ca_tag}, SYSDATE, #{ca_topic}, #{ca_desc}, #{ca_img})
+        INSERT INTO CAFE_INFO(CA_SEQ, USER_SEQ, CATE_SEQ, CA_URL, CA_NAME, CA_PUBLIC_YN, CA_TOPIC, CA_AREA, CA_TAG, CA_CREATE_DATE, CA_DESC, CA_IMG)
+             VALUES (CAFE_INFO_SEQ.NEXTVAL, #{user_seq}, #{cate_seq}, #{ca_url}, #{ca_name}, #{ca_public_yn}, #{ca_topic}, #{ca_area}, CAFE_TAG_SEQ.NEXTVAL, SYSDATE,  #{ca_desc}, #{ca_img})
     </insert>
-
-
 
     <resultMap id="resultCommonCode" type="com.travailler.common.entity.CommonCodeEntity">
         <result property="com_id"              column="COM_ID"        />

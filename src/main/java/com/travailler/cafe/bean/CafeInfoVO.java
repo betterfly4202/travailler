@@ -11,10 +11,19 @@ public class CafeInfoVO {
     private String caName;
     private String caPublicYn;
     private String caCreateDate;
-    private String caTag;
     private String caTopic;
+    private String caArea;
+    private String caTag;
     private String caDesc;
     private String caImg;
+
+    public String getCaArea() {
+        return caArea;
+    }
+
+    public void setCaArea(String caArea) {
+        this.caArea = caArea;
+    }
 
     public String getCaTag() {
         return caTag;

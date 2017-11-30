@@ -12,11 +12,13 @@ public class CafeInfoEntity {
     private String ca_url;
     private String ca_name;
     private String ca_public_yn;
+    private String ca_topic;
+    private String ca_area;
     private String ca_tag;
     private String ca_create_date;
-    private String ca_topic;
     private String ca_desc;
     private String ca_img;
+
 
     public CafeInfoVO toCafeinfoVO(){
         CafeInfoVO vo = new CafeInfoVO();
@@ -27,11 +29,20 @@ public class CafeInfoEntity {
         vo.setCaName(this.getCa_name());
         vo.setCaPublicYn(this.getCa_public_yn());
         vo.setCaCreateDate(this.getCa_create_date());
-        vo.setCaTag(this.getCa_tag());
         vo.setCaTopic(this.getCa_topic());
+        vo.setCaArea(this.getCa_area());
+        vo.setCaTag(this.getCa_tag());
         vo.setCaDesc(this.getCa_desc());
         vo.setCaImg(this.getCa_img());
         return vo;
+    }
+
+    public String getCa_area() {
+        return ca_area;
+    }
+
+    public void setCa_area(String ca_area) {
+        this.ca_area = ca_area;
     }
 
     public String getCa_tag() {
