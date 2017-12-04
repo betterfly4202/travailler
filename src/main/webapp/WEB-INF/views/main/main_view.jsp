@@ -43,6 +43,10 @@
             function fn_pluploadFile(){
                 location.href = "<c:url value="/main/plupload"/>";
             }
+
+            function fn_myuploadFile(){
+                location.href = "<c:url value="/my/uploader"/>";
+            }
         </script>
 
     </tiles:putAttribute>
@@ -64,6 +68,7 @@
                 <button onclick="fn_webChatting()">웹 채팅 바로가기</button>
                 <button onclick="fn_makeCafe()">카페 만들기</button>
                 <button onclick="fn_pluploadFile()">파일 업로드</button>
+                <button onclick="fn_myuploadFile()">파일 업로드22</button>
             </c:otherwise>
         </c:choose>
 

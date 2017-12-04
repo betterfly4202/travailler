@@ -26,6 +26,7 @@ out/
 .idea/
 *.iml
 rebel.xml
+resources/rebel.*
 
 bin/**
 tmp/**
