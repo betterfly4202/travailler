@@ -60,36 +60,16 @@ public class AddonFileController {
 
     @RequestMapping(value="/my/uploader")
     public ModelAndView myUploader(){
-        ModelAndView mav = new ModelAndView("/fileupload/myUpload");
+        ModelAndView mav = new ModelAndView("/fileupload/selfUpload");
 
         return mav;
     }
 
-
     @RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
-    public @ResponseBody String fileUpload(MultipartHttpServletRequest request, HttpServletResponse response) {
-
-        //0. notice, we have used MultipartHttpServletRequest
-
-        //1. get the files from the request object
-        Iterator<String> itr =  request.getFileNames();
-
-        MultipartFile mpf = request.getFile(itr.next());
-        System.out.println(mpf.getOriginalFilename() +" uploaded!");
-
-//        try {
-            //just temporary save file info into ufile
-//            ufile.length = mpf.getBytes().length;
-//            ufile.bytes= mpf.getBytes();
-//            ufile.type = mpf.getContentType();
-//            ufile.name = mpf.getOriginalFilename();
-
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-        //2. send it back to the client as <img> that calls get method
-        //we are using getTimeInMillis to avoid server cached image
+    public @ResponseBody String fileUpload(MultipartFile file, HttpServletResponse response) {
+        String filePath = propertiesValue.file_addonfile_save_path;
+        FileUpload fl = new FileUpload();
+        fl.basicUpload(file, filePath);
 
         return "SUCCESS";
     }

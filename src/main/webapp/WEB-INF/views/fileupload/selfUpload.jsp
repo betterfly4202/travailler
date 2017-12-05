@@ -29,50 +29,63 @@
 
     <script>
 
-        var files = [];
-        $(document)
-            .on(
-                "change",
-                "#fileLoader",
-                function(event) {
-                    files=event.target.files;
-                })
+        <%--$(function(){--%>
+            <%--$("#fileUpload").append("<input type=text value='"+files.name()+"'/>");--%>
+        <%--}--%>
 
-        $(document)
-            .on(
-                "click",
-                "#fileSubmit",
-                function() {
-                    processUpload();
-                })
+        <%--var files = [];--%>
+        <%--$(document).on("change","#fileLoader",function(event) {--%>
+            <%--$("#fileUpload").append("<input type=text value='"+files.name()+"'/>");--%>
+            <%--files=event.target.files;--%>
+        <%--})--%>
 
-        function processUpload()
-        {
-            var oMyForm = new FormData();
-            oMyForm.append("file", files[0]);
-            $
-                .ajax({dataType : 'json',
-                    url : "the url",
-                    data : oMyForm,
-                    type : "POST",
-                    enctype: 'multipart/form-data',
-                    processData: false,
-                    contentType:false,
-                    success : function(result) {
-                        //...;
-                    },
-                    error : function(result){
-                        //...;
-                    }
-                });
-        }
+        <%--$(document).on("click","#fileSubmit",function() {--%>
+            <%--processUpload();--%>
+        <%--})--%>
+
+        <%--function processUpload(){--%>
+            <%--var oMyForm = new FormData();--%>
+            <%--oMyForm.append("file", files[0]);--%>
+
+            <%--$.ajax({--%>
+                <%--dataType : 'json',--%>
+                <%--url : "<c:url value="/fileUpload"/>",--%>
+                <%--data : oMyForm,--%>
+                <%--type : "POST",--%>
+                <%--enctype: 'multipart/form-data',--%>
+                <%--processData: false,--%>
+                <%--contentType:false,--%>
+                <%--success : function(result) {--%>
+                    <%--alert(result);--%>
+                <%--},--%>
+                <%--error : function(result){--%>
+                    <%--//...;--%>
+                <%--}--%>
+            <%--});--%>
+        <%--}--%>
+
+
+
+        var file = document.querySelector("#getFile");
+        file.onchange = function(){
+            var fileList = file.files;
+
+            //읽기
+            var reader = new FileReader();
+            reader.readAsText(fileList[0]);
+
+            //로드한 후
+            reader.onload = function(){
+                document.querySelector("#preview").textContent = reader.result;
+            };
+        };
     </script>
 
     </tiles:putAttribute>
     <tiles:putAttribute name="contentBody">
-    <div id="fileUpload" class="dragAndDropDiv" style="height:300px;">Drag & Drop Files Here
-        <input type="file" name="file" id="fileLoader" />
-        <input type="button" id="fileSubmit" value="Upload"/>
-    </div>
+        <pre id="preview">텍스트 파일 내용 출력 영역</pre>
+        <input type="file" id="getFile" accept="text/*">
+
+
     </tiles:putAttribute>
 </tiles:insertDefinition>

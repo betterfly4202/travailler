@@ -36,7 +36,7 @@ public class FileUpload {
                 destFile.delete();
                 destFile = new File(folder, fileName);
             }
-            appendFile(file.getInputStream(), destFile, response);
+            appendFile(file.getInputStream(), destFile);
 
             if (chunk == chunks - 1) {
                 logger.info("upload success !");
@@ -49,7 +49,25 @@ public class FileUpload {
         }
     }
 
-    public void appendFile(InputStream in, File destFile, HttpServletResponse response) {
+    public void basicUpload(MultipartFile file, String filePath){
+        try{
+            String fileName = file.getOriginalFilename();
+            File folder = new File(filePath);
+            if (!folder.exists()) {
+                folder.mkdirs();
+            }
+            File destFile = new File(folder, fileName);
+            if (destFile.exists()) {
+                destFile.delete();
+                destFile = new File(folder, fileName);
+            }
+            appendFile(file.getInputStream(), destFile);
+        }catch (IOException e){
+            logger.error(e.getMessage());
+        }
+    }
+
+    public void appendFile(InputStream in, File destFile) {
 
         OutputStream out = null;
         try {

@@ -94,7 +94,7 @@
                     $(this).css('border', '2px dotted #0B85A1');
                     e.preventDefault();
                     var files = e.originalEvent.dataTransfer.files;
-
+                    files.slice();
                     handleFileUpload(files,objDragAndDrop);
                 });
 
@@ -111,6 +111,7 @@
                     e.stopPropagation();
                     e.preventDefault();
                 });
+
 
                 function handleFileUpload(files,obj)
                 {
@@ -203,7 +204,6 @@
                         },
                         success: function(data){
                             status.setProgress(100);
-
                             //$("#status1").append("File upload Done<br>");
                         }
                     });
@@ -216,13 +216,11 @@
 
     </tiles:putAttribute>
     <tiles:putAttribute name="contentBody">
-
-
         <div id="fileUpload" class="dragAndDropDiv" style="height:300px;">Drag & Drop Files Here</div>
         <br>
         <input type="file" id="fileUpload"/>
-
-
+        <input type="button" onclick="fn_fileUpload()" value="파일 올리기"/>
+        <br/><br/>
         * 현재 구현한 업로더 : http://huskdoll.tistory.com/294
         * 참고할만한 업로더 : http://doublesprogramming.tistory.com/131
         https://m.blog.naver.com/PostView.nhn?blogId=javaking75&logNo=220087655713&proxyReferer=https:%2F%2Fwww.google.co.kr%2F
