@@ -9,6 +9,8 @@
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="headBody">
 
+<script src="<c:url value="/resources/js/FileAPI.js"/>"></script>
+
 <style>
     .dragAndDropDiv {
         border: 2px dashed #92AAB0;
@@ -118,16 +120,15 @@
 
         function handleFileUpload(files,obj){
                 for (var i = 0; i < files.length; i++){
-
-
                     var fileClone = files[i].slice(0, files[i].size);
                     console.log(fileClone);
-                    console.log(URL.createObjectURL(fileClone));
+//                    console.log("file URL : "+URL.createObjectURL(fileClone));
 
                     var fd = new FormData();
                     fd.append('file', files[i]);
                     var status = new createStatusbar(obj); //Using this we can set progress.
                     status.setFileNameSize(files[i].name,files[i].size);
+                    sliceBlob(files[i]);
 //                    sendFileToServer(fd,status);
                 }
             }
@@ -152,15 +153,24 @@
          * fileSize 쪼개기 예제 : https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications#Example_Using_object_URLs_to_display_images
          * 깔끔한 file blob 처리 : http://h5homom.tistory.com/entry/html5-File
          * HTML5 File UPload API : http://www.codejs.co.kr/development/views/file-upload/
-         * URL method : http://www.javascripture.com/URL
+         * URL method : Lhttp://www.javascripture.com/UR
          */
 
         function sliceBlob(fileSlices){
             var blob = new Blob([fileSlices],
                         {type : 'application/octet-binary'}
                     );
+            blob.slice()
+            var reader = new FileReader();
+            reader.onload =  function(){
+              var result = new Unit8Array(reader.result);
+            };
+            reader.readAsArrayBuffer(blob);
 
-//            var blobUrl = window.URL.createObjectURL(blob);
+
+            var blobUrl = URL.createObjectURL(fileSlices);
+            console.log("blob url : "+blobUrl);
+
 
         }
 
