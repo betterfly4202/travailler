@@ -49,7 +49,7 @@
             }
 
             function fn_jqueryFile(){
-                location.href = "<c:url value="/jquery"/>";
+                location.href = "<c:url value="/gmedia/upload"/>";
             }
         </script>
 
@@ -73,7 +73,7 @@
                 <button onclick="fn_makeCafe()">카페 만들기</button>
                 <button onclick="fn_pluploadFile()">파일 업로드</button>
                 <button onclick="fn_myuploadFile()">파일 업로드22</button>
-                <button onclick="fn_jqueryFile()">파일 업로드333</button>
+                <button onclick="fn_jqueryFile()">GMEDIA UPLOADER</button>
             </c:otherwise>
         </c:choose>
 

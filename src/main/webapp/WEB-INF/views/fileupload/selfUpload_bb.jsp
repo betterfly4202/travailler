@@ -53,7 +53,39 @@
                         console.log("image : "+image);
                         document.body.appendChild(image);
                     }
-                    sendFileToServer(files[i]);
+                    sliceBlob(files[i]);
+//                    sendFileToServer(fd,status);
+                }
+            }
+
+
+            /**
+             *
+             * @param fileSlices
+             * 해야할 일
+             * URL.createObjectURL(blob)으로 담아서
+             * url로 받은 blob을 ajax로 서버에 전송하여 담음
+             * 서버에선 그 blob을 temp 파일로 담아서 파일 전송시 완료시킴
+             *
+             * 1. createObjectURL 생성
+             * 2. 파일 쪼개기 (10MB 정도의 크기)
+             * 3. ajax 구현하여 서버 전송
+             * 4. 서버에서 temp 파일로 blob파일 쌓기
+             * 5. 완료
+             *
+             * blob 활용법 (blob.slice) : https://taegon.kim/archives/5078
+             * fileSize 쪼개기 예제 : https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications#Example_Using_object_URLs_to_display_images
+             * 깔끔한 file blob 처리 : http://h5homom.tistory.com/entry/html5-File
+             * HTML5 File UPload API : http://www.codejs.co.kr/development/views/file-upload/
+             * URL method : Lhttp://www.javascripture.com/UR
+             */
+
+            function sliceBlob(fileSlices){
+                var xhr = new XMLHttpRequest();
+                xhr.onload = function(){
+                    xhr.responseText;
+                    xhr.getAllResponseHeaders();
+                    console.log(xhr.responseText +" /// "+ xhr.getAllResponseHeaders());
                 }
             }
 
@@ -103,63 +135,56 @@
                 }
             }
 
-            function sendFileToServer(file){
-                <%--var uploadURL = "<c:url value="/fileUpload"/>"; //Upload URL--%>
-                <%--var extraData ={}; //Extra Data.--%>
-                <%--var jqXHR=$.ajax({--%>
-                    <%--xhr: function() {--%>
-                        <%--var xhrobj = $.ajaxSettings.xhr();--%>
-                        <%--if (xhrobj.upload) {--%>
-                            <%--xhrobj.upload.addEventListener('progress', function(event) {--%>
-                                <%--var percent = 0;--%>
-                                <%--var position = event.loaded || event.position;--%>
-                                <%--var total = event.total;--%>
-                                <%--if (event.lengthComputable) {--%>
-                                    <%--percent = Math.ceil(position / total * 100);--%>
-                                <%--}--%>
-                                <%--//Set progress--%>
-                                <%--status.setProgress(percent);--%>
-                            <%--}, false);--%>
-                        <%--}--%>
-                        <%--return xhrobj;--%>
-                    <%--},--%>
-                    <%--url: uploadURL,--%>
-                    <%--type: "POST",--%>
-                    <%--contentType:false,--%>
-                    <%--processData: false,--%>
-                    <%--cache: false,--%>
-                    <%--data: fd,--%>
-                    <%--success: function(data){--%>
-                        <%--status.setProgress(100);--%>
-                        <%--//$("#status1").append("File upload Done<br>");--%>
-                    <%--}--%>
-                <%--});--%>
+            function sendFileToServer(fd,status){
+                var uploadURL = "<c:url value="/fileUpload"/>"; //Upload URL
+                var extraData ={}; //Extra Data.
+                var jqXHR=$.ajax({
+                    xhr: function() {
+                        var xhrobj = $.ajaxSettings.xhr();
+                        if (xhrobj.upload) {
+                            xhrobj.upload.addEventListener('progress', function(event) {
+                                var percent = 0;
+                                var position = event.loaded || event.position;
+                                var total = event.total;
+                                if (event.lengthComputable) {
+                                    percent = Math.ceil(position / total * 100);
+                                }
+                                //Set progress
+                                status.setProgress(percent);
+                            }, false);
+                        }
+                        return xhrobj;
+                    },
+                    url: uploadURL,
+                    type: "POST",
+                    contentType:false,
+                    processData: false,
+                    cache: false,
+                    data: fd,
+                    success: function(data){
+                        status.setProgress(100);
+                        //$("#status1").append("File upload Done<br>");
+                    }
+                });
 
-                <%--status.setAbort(jqXHR);--%>
-
-                var start = 10485760; // 10MB
-                var length = file.size - start;
-                var chunk = file.slice(start, length);
-
-                console.log("chunk size : "+chunk);
-                var xhr = new XMLHttpRequest();
-
-                xhr.open('POST','<c:url value="/fileUpload"/>' , true);
-                xhr.setRequestHeader("Cache-Control","no-cache");
-                xhr.setRequestHeader("X-Requested_with", "XMLHttpRequest");
-//                xhr.setRequestHeader("X-File-Name", file.name);
-//                xhr.setRequestHeader("X-File-Size", file.size);
-                xhr.send(chunk);
+                status.setAbort(jqXHR);
             }
         </script>
-        ¡
+¡
     </tiles:putAttribute>
     <tiles:putAttribute name="contentBody">
+        <%--&lt;%&ndash;<div class="statusbar" name="statusBar[]"></div>&ndash;%&gt;--%>
+        <%--<div class="filename"></div>--%>
+        <%--<div class="filesize"></div>--%>
+        <%--<div class="progressBar"><div></div></div>--%>
+        <%--<div class="abort">중지</div>--%>
+
         <pre id="preview">텍스트 파일 내용 출력 영역</pre>
         <div id="dropZone" class="dragAndDropDiv">
 
         </div>
         <input type="file" id="getFile" accept="text/*">
 
+        <div id="droptarget" style="width:300px; height:150px;">이미지 파일을 드롭하십시오</div>
     </tiles:putAttribute>
 </tiles:insertDefinition>
