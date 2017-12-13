@@ -16,15 +16,25 @@ public class FileUpload {
 
     private static final int BUFFER_SIZE = 100 * 1024;
 
-    public void plFileUpload(MultipartFile file, String filePath, String fileName, HttpServletRequest request, HttpServletResponse response){
+    public void plFileUpload(MultipartFile file, String filePath, String fileName, HttpServletRequest request){
         try {
             Integer chunk = 0, chunks = 0;
-            if(null != request.getParameter("chunk") && !request.getParameter("chunk").equals("")){
-                chunk = Integer.valueOf(request.getParameter("chunk"));
+
+//            if(null != request.getParameter("chunk") && !request.getParameter("chunk").equals("")){
+//                chunk = Integer.valueOf(request.getParameter("chunk"));
+//            }
+//            if(null != request.getParameter("chunks") && !request.getParameter("chunks").equals("")){
+//                chunks = Integer.valueOf(request.getParameter("chunks"));
+//            }
+
+            if(null != request.getParameter("CHUNK_COUNT") && !request.getParameter("CHUNK_COUNT").equals("")){
+                chunk = Integer.valueOf(request.getParameter("CHUNK_COUNT"));
             }
-            if(null != request.getParameter("chunks") && !request.getParameter("chunks").equals("")){
-                chunks = Integer.valueOf(request.getParameter("chunks"));
+            if(null != request.getParameter("TOTAL_CHUNKS") && !request.getParameter("TOTAL_CHUNKS").equals("")){
+                chunks = Integer.valueOf(request.getParameter("TOTAL_CHUNKS"));
             }
+
+
             logger.info("chunk:[" + chunk + "] chunks:[" + chunks + "]");
 
             File folder = new File(filePath);

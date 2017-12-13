@@ -184,7 +184,13 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.9.2</version>
         </dependency>
-
+        <!--
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        -->
         <!-- google social api-->
         <dependency>
             <groupId>org.springframework.social</groupId>

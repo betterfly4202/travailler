@@ -43,16 +43,6 @@
                     fd.append('file', files[i]);
                     var status = new createStatusbar(obj); //Using this we can set progress.
                     status.setFileNameSize(files[i].name,files[i].size);
-                    var reader = new FileReader();
-                    reader.readAsDataURL(files[i]);
-                    reader.onload = function(){
-                        var image = document.createElement('img');
-                        image.width = 400;
-                        image.height = 300;
-                        image.src = reader.result;
-                        console.log("image : "+image);
-                        document.body.appendChild(image);
-                    }
                     sendFileToServer(files[i]);
                 }
             }

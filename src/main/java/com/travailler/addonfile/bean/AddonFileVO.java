@@ -7,13 +7,15 @@ package com.travailler.addonfile.bean;
 
 public class AddonFileVO {
     private String fileName;
-    private String filePaht;
+    private String filePath;
+    private String filePieceChunk;
+    private String fileTotalChunk;
 
-    public AddonFileVO(String fileName, String filePaht) {
-        super();
-        this.fileName = fileName;
-        this.filePaht = filePaht;
-    }
+//    public AddonFileVO(String fileName, String filePath) {
+//        super();
+//        this.fileName = fileName;
+//        this.filePath = filePath;
+//    }
 
     public String getFileName() {
         return fileName;
@@ -23,11 +25,27 @@ public class AddonFileVO {
         this.fileName = fileName;
     }
 
-    public String getFilePaht() {
-        return filePaht;
+    public String getFilePath() {
+        return filePath;
     }
 
-    public void setFilePaht(String filePaht) {
-        this.filePaht = filePaht;
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String getFilePieceChunk() {
+        return filePieceChunk;
+    }
+
+    public void setFilePieceChunk(String filePieceChunk) {
+        this.filePieceChunk = filePieceChunk;
+    }
+
+    public String getFileTotalChunk() {
+        return fileTotalChunk;
+    }
+
+    public void setFileTotalChunk(String fileTotalChunk) {
+        this.fileTotalChunk = fileTotalChunk;
     }
 }
