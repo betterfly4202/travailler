@@ -94,38 +94,38 @@
             }
 
             function sendFileToServer(file){
-                <%--var uploadURL = "<c:url value="/fileUpload"/>"; //Upload URL--%>
-                <%--var extraData ={}; //Extra Data.--%>
-                <%--var jqXHR=$.ajax({--%>
-                    <%--xhr: function() {--%>
-                        <%--var xhrobj = $.ajaxSettings.xhr();--%>
-                        <%--if (xhrobj.upload) {--%>
-                            <%--xhrobj.upload.addEventListener('progress', function(event) {--%>
-                                <%--var percent = 0;--%>
-                                <%--var position = event.loaded || event.position;--%>
-                                <%--var total = event.total;--%>
-                                <%--if (event.lengthComputable) {--%>
-                                    <%--percent = Math.ceil(position / total * 100);--%>
-                                <%--}--%>
-                                <%--//Set progress--%>
-                                <%--status.setProgress(percent);--%>
-                            <%--}, false);--%>
-                        <%--}--%>
-                        <%--return xhrobj;--%>
-                    <%--},--%>
-                    <%--url: uploadURL,--%>
-                    <%--type: "POST",--%>
-                    <%--contentType:false,--%>
-                    <%--processData: false,--%>
-                    <%--cache: false,--%>
-                    <%--data: fd,--%>
-                    <%--success: function(data){--%>
-                        <%--status.setProgress(100);--%>
-                        <%--//$("#status1").append("File upload Done<br>");--%>
-                    <%--}--%>
-                <%--});--%>
+                var uploadURL = "<c:url value="/fileUpload"/>"; //Upload URL
+                var extraData ={}; //Extra Data.
+                var jqXHR=$.ajax({
+                    xhr: function() {
+                        var xhrobj = $.ajaxSettings.xhr();
+                        if (xhrobj.upload) {
+                            xhrobj.upload.addEventListener('progress', function(event) {
+                                var percent = 0;
+                                var position = event.loaded || event.position;
+                                var total = event.total;
+                                if (event.lengthComputable) {
+                                    percent = Math.ceil(position / total * 100);
+                                }
+                                //Set progress
+                                status.setProgress(percent);
+                            }, false);
+                        }
+                        return xhrobj;
+                    },
+                    url: uploadURL,
+                    type: "POST",
+                    contentType:false,
+                    processData: false,
+                    cache: false,
+                    data: fd,
+                    success: function(data){
+                        status.setProgress(100);
+                        //$("#status1").append("File upload Done<br>");
+                    }
+                });
 
-                <%--status.setAbort(jqXHR);--%>
+                status.setAbort(jqXHR);
 
                 var start = 10485760; // 10MB
                 var length = file.size - start;

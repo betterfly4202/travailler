@@ -13,22 +13,18 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/dragNdrop-ui.css"/>" media="ALL" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <style>
-        .progress {
-            color:#fff;
-        }
-        .meter {
-            width:0%;
-            font-size: 12px;
-            padding: .3em;
-        }
-    </style>
-
-    <%--<script src="<c:url value="/resources/js/GmediaUpload.js"/>"></script>--%>
     <script>
 
+    var dropBox = $("#dropZone");
+
+    var FILE_INFO, FILE_NAME, TOTAL_CHUNK;
+    var bars = document.getElementById('bars'),
+        progress = document.createElement('div'),
+        meter = document.createElement('span');
+    var CHUNK_COUNT = 0;
+
     $(function(){
-        //        var dropFile = $("#dropZone");
+
         $(document).on("dragenter",".dragAndDropDiv",function(e){
             e.stopPropagation();
             e.preventDefault();
@@ -48,16 +44,12 @@
         });
     });
 
-    var FILE_INFO, FILE_NAME, TOTAL_CHUNK;
-    var uploaders = [];
-    var bars = document.getElementById('bars'),
-        progress = document.createElement('div'),
-        meter = document.createElement('span');
-    var CHUNK_COUNT = 0;
 
     function handlingFileUpload(files){
         for(var i =0; i<files.length; i++){
             var file = files[i];
+            var status = new createStatusBar(dropBox);
+            status.setFileStatus(file.name, file.size);
             sliceFromFile(file);
         }
     }
@@ -85,140 +77,110 @@
             start = end;
             end = start + CHUNK_SIZE;
         }
+        console.log("counts : "+CHUNK_COUNT);
     }
 
     gmediaFileUpload = function(blobFile){
         var formData = new FormData;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST','<c:url value="/fileUpload"/>', false);
-
+        var status = new createStatusBar(dropBox);
         formData.append("file", blobFile);
         formData.append("fileName", FILE_NAME);
         formData.append("CHUNK_COUNT",CHUNK_COUNT);
         formData.append("TOTAL_CHUNKS",TOTAL_CHUNK);
-        xhr.setRequestHeader("Cache-Control","no-cache");
-        xhr.setRequestHeader("Pragma","no-cache");
-        xhr.setRequestHeader("Expires","0");
+//        uploaders.push(xhr);
+//        xhr.send(formData);
 
-        xhr.upload.onprogress = function (e) {
-            console.log("length ? "+e.lengthComputable);
-            if (e.lengthComputable) {
-                meter.value = Math.round((e.loaded / e.total) * 100);
-                meter.textContent = parseFloat(meter.value) + '%';
-                meter.style.width = meter.textContent;
+//        var fileData = {
+//            file : blobFile,
+//            fileName : FILE_NAME,
+//            CHUNK_COUNT : CHUNK_COUNT,
+//            TOTAL_CHUNKS : TOTAL_CHUNK
+//        }ss
+
+        var jqXHR = $.ajax({
+            xhr : function(){
+                var xhrObj = $.ajaxSettings.xhr();
+                if(xhrObj.upload){
+                    xhrObj.upload.addEventListener('progress', function(e){
+                        var percent = 0;
+                        var position = e.loaded || e.position;
+                        var total = e.total;
+                        if(e.lengthComputable){
+                            percent = Math.ceil(position / total * 100);
+                        }
+                        status.setProgress(percent);
+                        console.log(percent);
+                    }, false);
+                }
+                return xhrObj;
+            },
+            url : '<c:url value="/fileUpload"/>',
+            async : false,
+            type : 'POST',
+            contentType:false,
+            processData: false,
+            dataType : 'json',
+            data : formData,
+            success : function(data){
+                status.setProgress(100);
+//                CHUNK_COUNT++;
             }
-            if (meter.textContent === '100%') progress.classList.add('success');
-
-        };
-
-        xhr.onloadend = function (e) {
-            uploaders.pop();
-            if (!uploaders.length) {
-                bars.appendChild(document.createTextNode(' All Done! '));
-            }
-        };
-        uploaders.push(xhr);
-
-        xhr.send(formData);
+        });
+        status.setAbort(jqXHR);
         CHUNK_COUNT++;
     }
 
+    var rowCount = 0;
+    function createStatusBar(dropBox){
+        rowCount++;
+        var row = "odd";
+        if(rowCount % 2 == 0) row = "even";
 
-    window.onload  = function() {
-        var bars = document.getElementById('bars'),
-            uploaders = [],
-            upload,
-            chooseFile,
-            fileName,
-            TOTAL_CHUNKS;
-        var CHUNK_COUNT = 0;
+        this.statusbar = $("<div class='statusbar "+row+"'></div>");
+        this.filename = $("<div class='filename'></div>").appendTo(this.statusbar);
+        this.size = $("<div class='filesize'></div>").appendTo(this.statusbar);
+        this.progressBar = $("<div class='progressBar'><div></div></div>").appendTo(this.statusbar);
+        this.abort = $("<div class='abort'>중지</div>").appendTo(this.statusbar);
 
-        upload = function (blobOrFile) {
-            var formData = new FormData;
+        dropBox.after(this.statusbar);
 
-            var progress = document.createElement('div'),
-                meter = document.createElement('span');
-            progress.classList.add('progress');
-            meter.classList.add('meter');
-            bars.appendChild(progress);
-            progress.appendChild(meter);
-
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '<c:url value="/fileUpload"/>', false);
-            formData.append("file",blobOrFile);
-            formData.append("fileName",fileName);
-            formData.append("CHUNK_COUNT",CHUNK_COUNT);
-            formData.append("TOTAL_CHUNKS",TOTAL_CHUNKS);
-            xhr.setRequestHeader("Cache-Control","no-cache");
-            xhr.setRequestHeader("Pragma","no-cache");
-            xhr.setRequestHeader("Expires","0");
-
-            xhr.upload.onprogress = function (e) {
-                console.log("length ? "+e.lengthComputable);
-                if (e.lengthComputable) {
-                    meter.value = Math.round((e.loaded / e.total) * 100);
-                    meter.textContent = parseFloat(meter.value) + '%';
-                    meter.style.width = meter.textContent;
-                }
-                if (meter.textContent === '100%') progress.classList.add('success');
-            };
-            xhr.onloadend = function (e) {
-                uploaders.pop();
-                if (!uploaders.length) {
-                    bars.appendChild(document.createTextNode(' All Done! '));
-                }
-            };
-            uploaders.push(xhr);
-    //            xhr.send(blobOrFile);
-            xhr.send(formData);
-            CHUNK_COUNT++;
-
-        };
-
-        chooseFile = document.getElementById("file");
-        chooseFile.addEventListener('change', function (e) {
-            var self = e.currentTarget,
-                blob = self.files[0],
-                BYTES_PER_CHUNK, SIZE, start, end;
-
-            fileName = blob.name;
-            BYTES_PER_CHUNK = parseInt(document.getElementById('numChunks').value, 10);
-            SIZE = blob.size;
-            TOTAL_CHUNKS = Math.max(Math.ceil(SIZE / BYTES_PER_CHUNK), 1);
-            bars.innerHTML = '';
-            bars.innerHTML = '<p>Sending <b>' + TOTAL_CHUNKS + '</b> chunks:</p>';
-            start = 0;
-            end = BYTES_PER_CHUNK;
-
-            console.log("BYTES_PER_CHUNK : "+BYTES_PER_CHUNK + "// TOTAL_CHUNKS : " + TOTAL_CHUNKS);
-
-            while (start < SIZE) {
-                upload(blob.slice(start, end));
-                start = end;
-                end = start + BYTES_PER_CHUNK;
+        this.setFileStatus = function(name, size){
+            console.log("name :" +name+ " /// size : "+size);
+            var sizeStr = "";
+            var sizeKB = size/1024;
+            if(parseInt(sizeKB) > 1024){
+                var sizeMB = sizeKB / 1024;
+                sizeStr = sizeMB.toFixed(2) + "MB";
+            }else{
+                sizeStr = sizeKB.toFixed(2) + "KB";
             }
-        }, false);
-    }
+            this.filename.html(name);
+            this.size.html(sizeStr);
+        }
 
+        this.setProgress = function(progress) {
+            var progressBarWidth = progress * this.progressBar.width() / 100;
+            console.log("progress : "+progress + ", // barWidth : "+progressBarWidth);
+            this.progressBar.find('div').animate({width: progressBarWidth}, 10).html(progress + "%");
+            if (parseInt(progress) >= 100){
+                this.abort.hide();
+            }
+        }
+
+        this.setAbort = function(xhr){
+            var sb = this.statusbar;
+            this.abort.click(function(){
+                xhr.abort();
+                sb.hide();
+            });
+        }
+    }
     </script>
 
     </tiles:putAttribute>
     <tiles:putAttribute name="contentBody">
 
         <div id="dropZone" class="dragAndDropDiv">
-
-        <%--<div class="row">--%>
-            <%--<div class="large-12 column">--%>
-                <%--<p>Chunk Size: 10mb (10485760 bytes) / (5242880) </p>--%>
-                <%--<input type="number" min="10485760" value="10485760" id="numChunks" />--%>
-
-                <%--<input type="file" id="file" />--%>
-                <%--<div id="done"></div>--%>
-                <%--<div id="bars"></div>--%>
-                <%--<button type="button" id="uploadButton">파일전송</button>--%>
-            <%--</div>--%>
-        <%--</div>--%>
 
     </tiles:putAttribute>
 </tiles:insertDefinition>
