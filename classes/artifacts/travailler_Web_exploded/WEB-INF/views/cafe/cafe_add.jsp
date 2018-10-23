@@ -20,11 +20,11 @@
         <script>
             $(function(){
 
-               $("#cafeInfoForm").on("submit", function() {
-//                    var datas = $(this).serialize();
-                   alert("등록되었습니다");
-                   return false;
-               });
+//                $("#cafeInfoForm").on("submit", function() {
+////                    var datas = $(this).serialize();
+//                    alert("등록되었습니다");
+//                    return false;
+//                });
             });
 
 

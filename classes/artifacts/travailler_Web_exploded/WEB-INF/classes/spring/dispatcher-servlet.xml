@@ -1,0 +1,71 @@
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xmlns:beans="http://www.springframework.org/schema/beans"
+        xmlns:util="http://www.springframework.org/schema/util"
+        xsi:schemaLocation="
+ 	http://www.springframework.org/schema/beans
+ 	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+ 	http://www.springframework.org/schema/context
+ 	http://www.springframework.org/schema/context/spring-context-4.1.xsd
+ 	http://www.springframework.org/schema/mvc
+ 	http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+ 	http://www.springframework.org/schema/util
+	http://www.springframework.org/schema/util/spring-util-4.1.xsd
+	http://www.springframework.org/schema/security
+    ">
+
+
+    <mvc:default-servlet-handler/>
+    <mvc:annotation-driven/>
+
+    <context:annotation-config/>
+    <mvc:resources mapping="/WEB-INF/resources/" location="resources/js/**"/>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean id="loggerInterceptor" class="com.travailler.common.LoggerInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <beans:bean id="multipartResolver"
+                class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="maxUploadSize" value="5242880000" /> <!-- max upload size in bytes_5GB -->
+        <beans:property name="maxInMemorySize" value="1048576" /> <!--  max size of file in memory (in bytes)_1MB -->
+    </beans:bean>
+
+
+    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <beans:property name="prefix" value="/WEB-INF/views/"/>
+        <beans:property name="suffix" value=".jsp"/>
+        <beans:property name="order" value="1"/>
+    </beans:bean>
+
+    <!-- BeanNameViewResolver : view와 동일한 이름을 갖는 bean 을 view 객체로 사용
+                                custom view 클래스인 fileDown을 view로 사용하기 떄문에 mapping-->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+        <property name="order" value="0"/>
+    </bean>
+
+    <!-- custom view class -->
+    <bean id ="fileDownload" class="com.travailler.common.FileDownload"/>
+
+    <beans:bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>classpath:tiles/tiles-definitions.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <context:component-scan base-package="com.travailler">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+</beans>

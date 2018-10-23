@@ -32,10 +32,10 @@ public class CafeController extends BaseController {
             @ModelAttribute("cafeInfoVO")CafeInfoVO cafeInfoVO){
         ModelAndView mav = new ModelAndView("/cafe/cafe_add");
 
-        List<CommonCodeVO> areaCodeList = service.getAreaCode();
-        List<CommonCodeVO> subjectCodeList = service.getSubjectCode();
-        mav.addObject("areaCodeList",areaCodeList);
-        mav.addObject("subjectCodeList",subjectCodeList);
+//        List<CommonCodeVO> areaCodeList = service.getAreaCode();
+//        List<CommonCodeVO> subjectCodeList = service.getSubjectCode();
+//        mav.addObject("areaCodeList",areaCodeList);
+//        mav.addObject("subjectCodeList",subjectCodeList);
         return mav;
     }
 

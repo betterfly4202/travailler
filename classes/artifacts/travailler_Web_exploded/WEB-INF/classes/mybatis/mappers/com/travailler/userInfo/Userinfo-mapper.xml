@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.travailler.userInfo.dao.UserInfoMapperDao">
+
+
+    <resultMap id="resultLoginUser" type="com.travailler.login.entity.LoginEntity">
+        <result property="user_seq"                     column="USER_SEQ"    />
+        <result property="user_name"                    column="USER_NAME"   />
+        <result property="user_email"                   column="USER_EMAIL"  />
+        <result property="user_gender"                  column="USER_GENDER" />
+        <result property="user_birth"                   column="USER_BIRTH"  />
+        <result property="user_job"                     column="USER_JOB"    />
+        <result property="user_tag"                     column="USER_TAG"    />
+        <result property="user_area"                    column="USER_AREA"   />
+        <result property="user_create_date"             column="USER_CREATE_DATE" />
+    </resultMap>
+
+    <select id="selectUserInfo" resultMap="resultLoginUser">
+        SELECT USER_SEQ, USER_NAME, USER_EMAIL, USER_GENDER, USER_BIRTH, USER_JOB, USER_TAG, USER_AREA, USER_CREATE_DATE
+          FROM USER_INFO
+         WHERE USER_EMAIL = #{user_email}
+    </select>
+
+    <update id="updateUserInfo">
+        UPDATE USER_INFO
+           SET USER_GENDER = #{user_gender}
+             , USER_BIRTH = TO_DATE(#{user_birth , jdbcType=VARCHAR},'YYYY-MM-DD')
+             , USER_JOB = #{user_job}
+             , USER_TAG = #{user_tag}
+             , USER_AREA = #{user_area}
+         WHERE USER_SEQ = #{user_seq}
+    </update>
+
+</mapper>

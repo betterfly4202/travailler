@@ -37,7 +37,8 @@ public class LoginController extends OAuthConfiguration{
     // login base
     @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView login(HttpSession session){
-        ModelAndView modelAndView = new ModelAndView("login/login_main");
+//        ModelAndView modelAndView = new ModelAndView("login/login_main");
+        ModelAndView modelAndView = new ModelAndView("login/login");
         String url = oauthUrl();
         modelAndView.addObject("google_url",url);
 
