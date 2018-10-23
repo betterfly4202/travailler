@@ -23,6 +23,7 @@ out/
 .loadpath
 
 # Intellij #
+classes/artifactes/
 .idea/
 *.iml
 rebel.xml
