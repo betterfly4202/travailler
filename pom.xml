@@ -211,11 +211,14 @@
             <artifactId>httpcore</artifactId>
             <version>4.4.6</version>
         </dependency>
+
+        <!--
         <dependency>
             <groupId>com.travailler.sns</groupId>
             <artifactId>travailler</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        -->
 
         <!-- servelet for HttpServletResponse -->
         <dependency>
