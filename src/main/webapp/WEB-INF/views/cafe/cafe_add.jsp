@@ -165,6 +165,7 @@
         <%--<button type="submit">만들기</button>--%>
         <button type="submit" onclick="fn_createCafe()">만들기</button>
         <button type="button" onclick="history.back()">취소</button>
+
         </form:form>
     </tiles:putAttribute>
 </tiles:insertDefinition>

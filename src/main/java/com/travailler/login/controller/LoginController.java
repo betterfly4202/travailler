@@ -1,5 +1,6 @@
 package com.travailler.login.controller;
 
+import com.travailler.cafe.bean.CafeInfoVO;
 import com.travailler.common.OAuthConfiguration;
 import com.travailler.login.bean.LoginVO;
 import com.travailler.login.dao.LoginMapperDao;
@@ -8,9 +9,7 @@ import com.travailler.login.service.LoginMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.google.api.plus.Person;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -36,12 +35,11 @@ public class LoginController extends OAuthConfiguration{
 
     // login base
     @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView login(HttpSession session){
+    public ModelAndView login(HttpSession session, @ModelAttribute("cafeInfoVO")CafeInfoVO vo){
 //        ModelAndView modelAndView = new ModelAndView("login/login_main");
         ModelAndView modelAndView = new ModelAndView("login/login");
         String url = oauthUrl();
         modelAndView.addObject("google_url",url);
-
         return modelAndView;
     }
 
@@ -73,6 +71,24 @@ public class LoginController extends OAuthConfiguration{
         mav.setView(new RedirectView("/main"));
         mav.addObject("userInfo",person);
         mav.addObject("accessToken",accessToken);
+        return mav;
+    }
+
+    @GetMapping("/move")
+    public ModelAndView move(@RequestParam(value = "name") String name){
+        ModelAndView mav = new ModelAndView();
+
+        mav.setViewName("login/move");
+        mav.addObject("name", name);
+        return mav;
+    }
+
+    @PostMapping("/post")
+    public ModelAndView post(@RequestBody CafeInfoVO vo){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("login/move");
+        mav.addObject("vo", vo);
+        mav.addObject("name", "post");
         return mav;
     }
 

@@ -10,23 +10,27 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <script>
 
-        function travaillerAuth() {
-            location.href='${google_url}';
-        }
+
     </script>
 </head>
 <body>
 
-
-    <h2>LOGIN PAGE</h2>
-
-    <button type="button" onclick="move()">이동</button>
+    <h2>MOVE PAGE</h2>
+    <h3>${name}</h3>
+    <h3>
+        <c:choose>
+            <c:when test="vo != null">
+                ${vo.caArea}
+            </c:when>
+            <c:otherwise>
+                없음
+            </c:otherwise>
+        </c:choose>
+    </h3>
 
 </body>
 </html>
 
 <script>
-    function move(){
-        href.
-    }
+
 </script>
